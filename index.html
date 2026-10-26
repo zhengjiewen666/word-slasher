@@ -721,9 +721,85 @@
       color: var(--text-main);
       box-shadow: var(--shadow-sm);
     }
+
+    /* 实时全自动云同步组件与状态徽标 */
+    .sync-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--text-main);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .sync-btn.synced {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #065f46;
+    }
+    .sync-btn.syncing {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+    }
+    .sync-btn.syncing .sync-spin-icon {
+      display: inline-block;
+      animation: spin 0.8s linear infinite;
+    }
+    .sync-btn.offline {
+      background: #fffbeb;
+      border-color: #fde68a;
+      color: #92400e;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* 移动端下拉刷新条 (特别优化 iOS PWA / Safari 全屏沉浸体验) */
+    .pull-refresh-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: rgba(16, 185, 129, 0.95);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 99999;
+      transform: translateY(-100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .pull-refresh-indicator.visible {
+      transform: translateY(0);
+    }
+    .pull-refresh-indicator .spinner {
+      display: inline-block;
+      animation: spin 0.8s linear infinite;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
+
+  <!-- 移动端下拉刷新挂载条 -->
+  <div id="pullRefreshIndicator" class="pull-refresh-indicator">
+    <span class="spinner">🔄</span>
+    <span id="pullRefreshText">下拉同步云端最新数据...</span>
+  </div>
 
   <!-- 顶部导航 -->
   <header>
@@ -735,11 +811,9 @@
       </div>
 
       <div class="header-actions">
-        <button class="btn-sm btn-primary" id="loadMidtermBtn" style="background: linear-gradient(135deg, #10b981, #059669);" title="一键载入大学英语4半期考全量必背词库">
-          📘 载入大英4半期考(168词)
-        </button>
-        <button class="btn-sm btn-secondary" id="openPresetsBtn" title="导入高频真题词库">
-          ⚡ 试用词包
+        <button class="sync-btn synced" id="syncStatusBtn" title="全自动实时云同步（点击立即强制刷新）" onclick="syncCloud('manual')">
+          <span class="sync-spin-icon" id="syncIcon">☁️</span>
+          <span id="syncText">已同步</span>
         </button>
         <button class="btn-sm btn-primary" id="openImportBtn">
           ➕ 导入单词
@@ -833,6 +907,14 @@
             <span>对纯单词自动补全网络权威词典</span>
           </label>
           <button class="btn-sm btn-secondary" id="quickSampleBtn">填充范例</button>
+        </div>
+
+        <div style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <span style="font-size:12px; color:var(--text-sub);">《大学英语4》半期考核心词包：</span>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-sm btn-secondary" id="openPresetsBtn" style="font-size:12px;">⚡ 试用词包</button>
+            <button class="btn-sm btn-secondary" id="loadMidtermBtn" style="font-size:12px; background:#ecfdf5; border-color:#a7f3d0; color:#065f46;">📘 恢复半期考(168词)</button>
+          </div>
         </div>
       </div>
       <div class="sheet-footer">
@@ -2455,6 +2537,169 @@
     let activeTab = 'pending';
     let isMasked = true;
 
+    // ==========================================
+    // 2.5 全自动无感云同步引擎 (多端双向实时对齐)
+    // ==========================================
+    const syncStatusBtn = document.getElementById('syncStatusBtn');
+    const syncIcon = document.getElementById('syncIcon');
+    const syncText = document.getElementById('syncText');
+    let isSyncing = false;
+    let pushDebounceTimer = null;
+
+    function setSyncUI(state, text) {
+      if (!syncStatusBtn) return;
+      syncStatusBtn.className = 'sync-btn ' + state;
+      if (syncText) syncText.textContent = text;
+      if (syncIcon) {
+        if (state === 'syncing') {
+          syncIcon.textContent = '🔄';
+        } else if (state === 'synced') {
+          syncIcon.textContent = '☁️';
+        } else if (state === 'offline') {
+          syncIcon.textContent = '⚠️';
+        }
+      }
+    }
+
+    // 智能双向冲突合并算法 (CRDT原则：任何一端斩词均永久保留，新词智能并集)
+    function smartMerge(localList, remoteList) {
+      const map = new Map();
+      let hasChanges = false;
+      let localHasNewer = false;
+
+      // 1. 先载入云端远端词库
+      for (const rw of remoteList) {
+        if (!rw || !rw.word) continue;
+        map.set(rw.word.toLowerCase(), { ...rw });
+      }
+
+      // 2. 将本地词库对齐合并
+      for (const lw of localList) {
+        if (!lw || !lw.word) continue;
+        const key = lw.word.toLowerCase();
+        if (!map.has(key)) {
+          // 本地特有（例如本地新导入的词）
+          map.set(key, { ...lw });
+          hasChanges = true;
+          localHasNewer = true;
+        } else {
+          const item = map.get(key);
+          const localTs = lw.status_updated_at || (lw.slashed ? 1 : 0);
+          const remoteTs = item.status_updated_at || (item.slashed ? 1 : 0);
+
+          if (localTs > remoteTs) {
+            // 本地操作更新（如手机端刚刚新斩或复活）
+            item.slashed = lw.slashed;
+            item.status_updated_at = localTs;
+            localHasNewer = true;
+          } else if (remoteTs > localTs) {
+            // 云端操作更新
+            item.slashed = item.slashed;
+            hasChanges = true;
+          } else {
+            // 时间戳一致或旧数据：取并集！凡有一端已斩，即视为已斩！
+            if (lw.slashed && !item.slashed) {
+              item.slashed = true;
+              item.status_updated_at = Date.now();
+              localHasNewer = true;
+            } else if (!lw.slashed && item.slashed) {
+              hasChanges = true;
+            }
+          }
+        }
+      }
+
+      const mergedDeck = Array.from(map.values());
+      return { mergedDeck, hasChanges, localHasNewer };
+    }
+
+    // 执行拉取云端并对齐
+    async function syncCloud(trigger = 'auto') {
+      if (isSyncing) return;
+      isSyncing = true;
+      setSyncUI('syncing', '正在同步...');
+
+      try {
+        const res = await fetch('/api/sync?t=' + Date.now(), {
+          cache: 'no-store',
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!res.ok) {
+          if (res.status === 404) {
+            setSyncUI('offline', '本地模式');
+          } else {
+            setSyncUI('offline', '云端稍后重试');
+          }
+          isSyncing = false;
+          return;
+        }
+
+        const cloudData = await res.json();
+        if (cloudData && Array.isArray(cloudData.deck)) {
+          const { mergedDeck, hasChanges, localHasNewer } = smartMerge(wordDeck, cloudData.deck);
+
+          if (hasChanges || localHasNewer) {
+            wordDeck = mergedDeck;
+            persistLocally();
+            render();
+          }
+
+          if (localHasNewer) {
+            // 本地有更新的斩词记录，推送到云端持久化
+            await pushToCloud(mergedDeck);
+          } else {
+            setSyncUI('synced', '已同步');
+          }
+
+          if (trigger === 'manual' || trigger === 'pull') {
+            const slashed = wordDeck.filter(w => w.slashed).length;
+            showToast(`同步成功！已斩杀 ${slashed} 词，待斩 ${wordDeck.length - slashed} 词`, '☁️');
+          }
+        } else {
+          setSyncUI('synced', '已就绪');
+        }
+      } catch (err) {
+        console.warn('Sync failed (offline/error):', err);
+        setSyncUI('offline', '离线存储中');
+      } finally {
+        isSyncing = false;
+      }
+    }
+
+    // 推送词库到云端
+    async function pushToCloud(deckToPush) {
+      try {
+        const res = await fetch('/api/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            deck: deckToPush,
+            last_modified: Date.now()
+          })
+        });
+        if (res.ok) {
+          setSyncUI('synced', '已实时同步');
+          return true;
+        } else {
+          setSyncUI('offline', '同步稍后重试');
+          return false;
+        }
+      } catch (err) {
+        setSyncUI('offline', '离线存储中');
+        return false;
+      }
+    }
+
+    // 防抖自动推送（用户快速连斩时聚合为一次网络请求）
+    function triggerAutoCloudPush() {
+      setSyncUI('syncing', '正在同步...');
+      clearTimeout(pushDebounceTimer);
+      pushDebounceTimer = setTimeout(() => {
+        pushToCloud(wordDeck);
+      }, 500);
+    }
+
     function initData() {
       let saved = null;
       try {
@@ -2471,24 +2716,38 @@
         }
       } else {
         wordDeck = [...INITIAL_DECK];
-        persist();
+        persistLocally();
       }
 
       // 如果本地只有少量旧测试词或为空，自动无缝升级为全量 168 半期考核心词库！
       if (!wordDeck || wordDeck.length < 10) {
         wordDeck = [...INITIAL_DECK];
-        persist();
+        persistLocally();
       }
 
+      // 确保每个词都拥有时间戳
+      wordDeck.forEach(w => {
+        if (w.status_updated_at === undefined) {
+          w.status_updated_at = w.slashed ? 1 : 0;
+        }
+      });
+
       render();
+
+      // 页面载入时立即触发静默后台云同步
+      syncCloud('init');
     }
 
-    function persist() {
+    function persistLocally() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(wordDeck));
       } catch(e) {
         console.warn('LocalStorage save failed (sandbox restricted):', e);
       }
+    }
+
+    function persist() {
+      persistLocally();
       render();
     }
 
@@ -2590,14 +2849,18 @@
           const target = wordDeck.find(w => w.id === id);
           if (target) {
             target.slashed = true;
+            target.status_updated_at = Date.now();
             persist();
+            triggerAutoCloudPush();
           }
         }, 340);
       } else {
         const target = wordDeck.find(w => w.id === id);
         if (target) {
           target.slashed = true;
+          target.status_updated_at = Date.now();
           persist();
+          triggerAutoCloudPush();
         }
       }
     };
@@ -2607,7 +2870,9 @@
       const target = wordDeck.find(w => w.id === id);
       if (target) {
         target.slashed = false;
+        target.status_updated_at = Date.now();
         persist();
+        triggerAutoCloudPush();
       }
     };
 
@@ -2808,6 +3073,7 @@ lucid 清晰易懂的；神志清醒的`;
 
       wordDeck = [...newItems, ...wordDeck];
       persist();
+      triggerAutoCloudPush();
 
       confirmImportBtn.disabled = false;
       confirmImportBtn.textContent = '确认导入';
@@ -2820,6 +3086,7 @@ lucid 清晰易懂的；神志清醒的`;
     document.getElementById('loadMidtermBtn').addEventListener('click', () => {
       wordDeck = [...INITIAL_DECK];
       persist();
+      triggerAutoCloudPush();
       showToast('已载入《大学英语4》半期考全部 168 个核心词！', '🎉');
     });
 
@@ -2841,6 +3108,7 @@ lucid 清晰易懂的；神志清醒的`;
 
       if (added > 0) {
         persist();
+        triggerAutoCloudPush();
         showToast(`已为你追加 ${added} 个考点高频词！`, '⚡');
       } else {
         showToast('这些范例词已在词库中！', 'ℹ️');
@@ -2907,6 +3175,70 @@ lucid 清晰易懂的；神志清醒的`;
         if (firstPending) pronounce(firstPending.word);
       }
     });
+
+    // ==========================================
+    // 7. 全自动后台监听与触控下拉刷新
+    // ==========================================
+    // 页面可见性改变（如手机锁屏后再打开、切换回本App）：自动静默同步！
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        syncCloud('visibility');
+      }
+    });
+
+    // 窗口重新获得焦点（如电脑切回浏览器标签页）：自动同步！
+    window.addEventListener('focus', () => {
+      syncCloud('focus');
+    });
+
+    // 网络恢复在线时自动同步
+    window.addEventListener('online', () => {
+      syncCloud('online');
+    });
+
+    // 活跃状态下每 20 秒轻量静默轮询一次，保证电脑端/手机端无需刷新实时对齐
+    setInterval(() => {
+      if (document.visibilityState === 'visible' && navigator.onLine) {
+        syncCloud('timer');
+      }
+    }, 20000);
+
+    // 移动端下拉手势刷新 (专为 iOS PWA / Safari 无地址栏全屏应用打造)
+    let touchStartY = 0;
+    let isPulling = false;
+    const pullIndicator = document.getElementById('pullRefreshIndicator');
+
+    window.addEventListener('touchstart', (e) => {
+      if (window.scrollY <= 2 && e.touches.length === 1) {
+        touchStartY = e.touches[0].clientY;
+        isPulling = true;
+      } else {
+        isPulling = false;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isPulling || !pullIndicator) return;
+      const currentY = e.touches[0].clientY;
+      const diff = currentY - touchStartY;
+      if (diff > 55 && window.scrollY <= 0) {
+        pullIndicator.classList.add('visible');
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      if (!isPulling || !pullIndicator) return;
+      isPulling = false;
+      if (pullIndicator.classList.contains('visible')) {
+        pullIndicator.innerHTML = '<span class="spinner">🔄</span> 正在同步最新进度...';
+        syncCloud('pull').finally(() => {
+          setTimeout(() => {
+            pullIndicator.classList.remove('visible');
+            pullIndicator.innerHTML = '<span class="spinner">🔄</span> 下拉同步云端最新数据...';
+          }, 400);
+        });
+      }
+    }, { passive: true });
 
     initData();
   </script>
