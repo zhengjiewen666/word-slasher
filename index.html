@@ -1,0 +1,2914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="斩词客">
+  <meta name="theme-color" content="#10b981">
+  <title>斩词客 - 自定义导入背单词神器</title>
+  <style>
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --primary-light: #ecfdf5;
+      --danger: #ef4444;
+      --danger-dark: #dc2626;
+      --danger-light: #fef2f2;
+      --accent: #f59e0b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #64748b;
+      --text-muted: #94a3b8;
+      --radius: 16px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.12);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      user-select: none;
+    }
+
+    /* 顶部导航与沉浸栏 */
+    header {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-icon {
+      font-size: 22px;
+      filter: drop-shadow(0 2px 4px rgba(239, 68, 68, 0.3));
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 按钮规范 */
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+
+    .btn-secondary {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover { background: #f1f5f9; }
+
+    /* 主视口布局 */
+    main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px 16px 80px;
+    }
+
+    /* 统计面板 */
+    .dashboard-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      text-align: center;
+    }
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 2px;
+      font-weight: 500;
+    }
+
+    .stat-num {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.1;
+      font-feature-settings: "tnum";
+    }
+
+    .stat-num.pending { color: var(--primary); }
+    .stat-num.slashed { color: var(--danger); }
+    .stat-num.total { color: var(--text-main); }
+
+    .progress-bar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-sub);
+    }
+
+    .progress-track {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* 控制栏与遮盖模式切换 */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .tabs {
+      display: flex;
+      background: #e2e8f0;
+      padding: 3px;
+      border-radius: 12px;
+      gap: 2px;
+    }
+
+    .tab-item {
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 9px;
+      color: var(--text-sub);
+      background: transparent;
+      border: none;
+    }
+
+    .tab-item.active {
+      background: white;
+      color: var(--text-main);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .mask-switch {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .mask-switch input {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    /* 单词列表 */
+    .cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* 单张卡片（百词斩经典极简风格） */
+    .word-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+    }
+
+    .word-card:active {
+      transform: scale(0.99);
+    }
+
+    @media (hover: hover) {
+      .word-card:hover {
+        box-shadow: var(--shadow);
+        border-color: #cbd5e1;
+      }
+    }
+
+    /* 斩杀刀光划痕与飞散动效 */
+    .slash-blade-line {
+      position: absolute;
+      top: 50%;
+      left: -20%;
+      width: 140%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #ef4444, #ffffff, #ef4444, transparent);
+      box-shadow: 0 0 16px #ef4444, 0 0 4px #ffffff;
+      transform: translateY(-50%) rotate(-8deg);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .word-card.slashing {
+      animation: slashCardOut 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .word-card.slashing .slash-blade-line {
+      animation: slashBladeCut 0.35s ease-out forwards;
+    }
+
+    @keyframes slashBladeCut {
+      0% { opacity: 0; transform: translateY(-50%) rotate(-12deg) scaleX(0.1); }
+      40% { opacity: 1; transform: translateY(-50%) rotate(-8deg) scaleX(1.1); }
+      100% { opacity: 0; transform: translateY(-50%) rotate(-4deg) scaleX(1.4); }
+    }
+
+    @keyframes slashCardOut {
+      0% { transform: scale(1); filter: brightness(1); }
+      35% { transform: translateX(10px) rotate(-1deg) scale(0.98); filter: brightness(1.2); }
+      100% { transform: translateX(110%) scale(0.85); opacity: 0; height: 0; margin: 0; padding: 0; border: none; }
+    }
+
+    .word-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .word-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .word-name {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--text-main);
+    }
+
+    .word-phonetic {
+      font-size: 13px;
+      color: var(--text-sub);
+      background: #f1f5f9;
+      padding: 1px 7px;
+      border-radius: 6px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+    }
+
+    .pronounce-btn {
+      background: #f1f5f9;
+      border: none;
+      color: var(--text-sub);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .pronounce-btn:hover {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    /* 释义与遮盖层 */
+    .meaning-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      margin-top: 4px;
+      cursor: pointer;
+      max-width: 100%;
+      padding: 3px 8px;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    .meaning-wrap:not(.is-masked):hover {
+      background: #f1f5f9;
+    }
+
+    .meaning-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #334155;
+      display: block;
+      word-break: break-word;
+      transition: filter 0.2s, opacity 0.2s;
+    }
+
+    /* 揭开时显示的提示小图标，告诉用户点这里可以再次遮住 */
+    .meaning-wrap:not(.is-masked) .hide-hint {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+      background: #f1f5f9;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    /* 遮盖模式：高斯模糊 + 盖板 */
+    .meaning-wrap.is-masked {
+      background: transparent;
+    }
+
+    .meaning-wrap.is-masked .hide-hint {
+      display: none;
+    }
+
+    .meaning-wrap.is-masked .meaning-text {
+      filter: blur(8px);
+      opacity: 0.15;
+      user-select: none;
+    }
+
+    .mask-cover {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: #e2e8f0;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-sub);
+      padding: 4px 10px;
+      letter-spacing: 0.3px;
+    }
+
+    .meaning-wrap.is-masked .mask-cover {
+      display: flex;
+    }
+
+    .mask-cover:hover {
+      background: #cbd5e1;
+      color: var(--text-main);
+    }
+
+    /* 右侧操作区 */
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-detail {
+      background: #f1f5f9;
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    .btn-detail:hover { background: #e2e8f0; }
+
+    .btn-slash {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
+    }
+    .btn-slash:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-revive {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    /* 已斩状态样式 */
+    .word-card.is-slashed {
+      background: #fafafa;
+      opacity: 0.65;
+    }
+    .word-card.is-slashed .word-name {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    /* 空状态 */
+    .empty-state {
+      background: white;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 48px 20px;
+      text-align: center;
+    }
+    .empty-icon { font-size: 46px; margin-bottom: 12px; }
+    .empty-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .empty-desc { font-size: 14px; color: var(--text-sub); max-width: 400px; margin: 0 auto 18px; }
+
+    /* 抽屉 / 模态框 */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 100;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sheet-panel {
+      background: white;
+      width: 100%;
+      max-width: 600px;
+      max-height: 88vh;
+      border-radius: 24px 24px 0 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      padding-bottom: var(--safe-bottom);
+    }
+
+    @media (min-width: 640px) {
+      .modal-backdrop {
+        align-items: center;
+        padding: 20px;
+      }
+      .sheet-panel {
+        border-radius: 20px;
+        transform: scale(0.95) translateY(0);
+        box-shadow: var(--shadow-lg);
+      }
+      .modal-backdrop.open .sheet-panel {
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-backdrop.open .sheet-panel {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #cbd5e1;
+      border-radius: 999px;
+      margin: 10px auto 4px;
+    }
+
+    .sheet-header {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sheet-title {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .sheet-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .sheet-footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: #f8fafc;
+    }
+
+    /* 导入文本框 */
+    .textarea-box {
+      width: 100%;
+      height: 160px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      line-height: 1.6;
+      resize: vertical;
+    }
+    .textarea-box:focus {
+      outline: 2px solid var(--primary);
+      border-color: transparent;
+    }
+
+    .format-guide {
+      background: #f1f5f9;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .format-guide code {
+      background: #e2e8f0;
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: #0f172a;
+      font-size: 12px;
+    }
+
+    /* 词典详情排版 */
+    .dict-hero {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .dict-word {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .dict-pos-card {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+    }
+    .dict-pos-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .dict-def-row {
+      margin-bottom: 8px;
+      padding-left: 10px;
+      border-left: 2px solid #cbd5e1;
+    }
+    .dict-def-zh {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .dict-def-en {
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    /* 电脑端底部键盘提示 */
+    .pc-kbd-bar {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    @media (min-width: 768px) {
+      .pc-kbd-bar { display: flex; }
+    }
+    .kbd {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">🗡️</span>
+        <span class="brand-name">斩词客</span>
+        <span class="brand-badge">PWA</span>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-sm btn-primary" id="loadMidtermBtn" style="background: linear-gradient(135deg, #10b981, #059669);" title="一键载入大学英语4半期考全量必背词库">
+          📘 载入大英4半期考(168词)
+        </button>
+        <button class="btn-sm btn-secondary" id="openPresetsBtn" title="导入高频真题词库">
+          ⚡ 试用词包
+        </button>
+        <button class="btn-sm btn-primary" id="openImportBtn">
+          ➕ 导入单词
+        </button>
+        <button class="btn-sm btn-secondary" id="exportBtn" title="备份导出">
+          💾 导出
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体内容 -->
+  <main>
+    <!-- 统计看板 -->
+    <section class="dashboard-card">
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-label">待斩生词</span>
+          <span class="stat-num pending" id="statPending">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">已斩归档</span>
+          <span class="stat-num slashed" id="statSlashed">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">词汇总量</span>
+          <span class="stat-num total" id="statTotal">0</span>
+        </div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-info">
+          <span>斩杀通关进度</span>
+          <span id="statPercent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 工具与过滤器 -->
+    <div class="toolbar">
+      <div class="tabs">
+        <button class="tab-item active" data-tab="pending">待斩生词 (<span id="tabCountPending">0</span>)</button>
+        <button class="tab-item" data-tab="slashed">已斩杀 (<span id="tabCountSlashed">0</span>)</button>
+        <button class="tab-item" data-tab="all">全部</button>
+      </div>
+
+      <label class="mask-switch" title="背诵时遮住释义，点击临时揭开">
+        <input type="checkbox" id="maskToggle" checked>
+        <span>🙈 遮住意思 (背诵模式)</span>
+      </label>
+    </div>
+
+    <!-- 单词卡片列表 -->
+    <div class="cards-container" id="cardsContainer">
+      <!-- 动态卡片 -->
+    </div>
+
+    <!-- 电脑端键盘提示 -->
+    <div class="pc-kbd-bar">
+      <span>⌨️ 电脑快捷盲操：</span>
+      <span><span class="kbd">空格</span> 揭晓/隐藏释义</span>
+      <span><span class="kbd">Enter</span> 斩掉首词</span>
+      <span><span class="kbd">S</span> 朗读发音</span>
+    </div>
+  </main>
+
+  <!-- 导入抽屉/模态框 -->
+  <div class="modal-backdrop" id="importModal">
+    <div class="sheet-panel">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title">📥 批量导入我的单词库</div>
+        <button class="pronounce-btn" data-close="importModal" style="font-size:16px;">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="format-guide">
+          <strong>💡 自由支持任意粘贴格式：</strong><br>
+          • 纯英文单词 (每行一个，自动联网或匹配释义)：<br>
+          <code>epiphany</code><br>
+          • 单词 + 中文 (空格、Tab 或连字符分割)：<br>
+          <code>serendipity - 意外偶得珍奇之物的机缘</code><br>
+          <code>resilience [rɪˈzɪl.jəns] 适应力；坚韧</code>
+        </div>
+        <textarea class="textarea-box" id="importInput" placeholder="在此粘贴你的生词本..."></textarea>
+        <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center;">
+          <label style="font-size:13px; color:var(--text-sub); display:flex; align-items:center; gap:6px;">
+            <input type="checkbox" id="autoFetchCheck" checked>
+            <span>对纯单词自动补全网络权威词典</span>
+          </label>
+          <button class="btn-sm btn-secondary" id="quickSampleBtn">填充范例</button>
+        </div>
+      </div>
+      <div class="sheet-footer">
+        <button class="btn-sm btn-secondary" data-close="importModal">取消</button>
+        <button class="btn-sm btn-primary" id="confirmImportBtn">确认导入</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完整解释抽屉/模态框 -->
+  <div class="modal-backdrop" id="detailModal">
+    <div class="sheet-panel">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title">📖 完整词典深度解释</div>
+        <button class="pronounce-btn" data-close="detailModal" style="font-size:16px;">✕</button>
+      </div>
+      <div class="sheet-body" id="detailModalBody">
+        <!-- 动态词典解析 -->
+      </div>
+      <div class="sheet-footer">
+        <button class="btn-sm btn-primary" data-close="detailModal">已理解，关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    // 原生无阻碍轻量 Toast 提示 (完美兼容 iOS 文件预览/Safari/沙盒，不依赖 alert/confirm)
+    function showToast(msg, icon = '💡') {
+      let toast = document.getElementById('sys-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'sys-toast';
+        toast.style.cssText = 'position:fixed; top:24px; left:50%; transform:translateX(-50%); background:rgba(15,23,42,0.92); backdrop-filter:blur(8px); color:#ffffff; padding:10px 20px; border-radius:12px; font-size:14px; font-weight:600; z-index:99999; box-shadow:0 10px 30px rgba(0,0,0,0.25); transition:all 0.25s ease; opacity:0; pointer-events:none; display:flex; align-items:center; gap:8px; max-width:90%; text-align:center;';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<span>${icon}</span><span>${msg}</span>`;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(-8px)';
+      }, 2300);
+    }
+
+    // ==========================================
+    // 1. Web Audio API 逼真破风刀剑劈砍音效
+    // ==========================================
+    function playSlashSound() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const duration = 0.16;
+        const bufferSize = ctx.sampleRate * duration;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.04));
+        }
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(4500, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(700, ctx.currentTime + duration);
+        filter.Q.value = 2.8;
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.85, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        noise.start();
+      } catch (e) {}
+
+      // 手机马达震动
+      if (navigator.vibrate) {
+        try { navigator.vibrate([15, 30, 20]); } catch(e) {}
+      }
+    }
+
+    // 语音朗读
+    function pronounce(word) {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(word);
+      u.lang = 'en-US';
+      u.rate = 0.88;
+      window.speechSynthesis.speak(u);
+    }
+
+    // ==========================================
+    // 2. 词库持久化
+    // ==========================================
+    const STORAGE_KEY = 'word_slasher_deck_midterm_v1';
+    const INITIAL_DECK = [
+  {
+    "id": "midterm_1",
+    "word": "enroll",
+    "phonetic": "/ɪnˈrəʊl/",
+    "meaning": "[v.] 招收，吸收；登记，注册（入校/加入课程等）",
+    "detail": "核心搭配: enroll in (a course / school); enroll sb. in / on sth.; enrollment rate | 考点提示: 单元测试Q15、Q35核心考点，常考搭配 enroll in",
+    "example": "More college graduates choose to enroll in short-term training courses to improve their practical work skills.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_2",
+    "word": "object",
+    "phonetic": "/ˈɒbdʒɪkt/ (n.) /əbˈdʒekt/ (v.)",
+    "meaning": "[n. / v.] n. 目标，目的，宗旨；物体；v. 反对，抗议",
+    "detail": "核心搭配: object to doing sth.; a physical object; object of study; raise an objection | 考点提示: 作动词时后接介词 to + 名词/动名词",
+    "example": "No one objected to the proposal when it was presented at the meeting.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_3",
+    "word": "objective",
+    "phonetic": "/əbˈdʒektɪv/",
+    "meaning": "[n. / adj.] n. 目标，目的；adj. 客观的，实事求是的",
+    "detail": "核心搭配: achieve one's objective; an objective assessment / view; remain objective | 考点提示: 区分 subjective (主观的)",
+    "example": "Scientists must maintain an objective attitude when observing natural specimens.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_4",
+    "word": "objection",
+    "phonetic": "/əbˈdʒekʃn/",
+    "meaning": "[n.] 反对，异议，反对的理由",
+    "detail": "核心搭配: have / raise an objection to sth.; without objection | 考点提示: 搭配 have an objection to sth.",
+    "example": "The committee voiced strong objections to the proposed construction plan.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_5",
+    "word": "antecedent",
+    "phonetic": "/ˌæntɪˈsiːdnt/",
+    "meaning": "[n. / adj.] n. 前事，先例，祖先，来历；adj. 先行的，先前的",
+    "detail": "核心搭配: historical antecedents; antecedent events; antecedent to sth. | 考点提示: 词根 cede (走) + ante (前) -> 先前发生的事物",
+    "example": "We cannot fully understand the present situation without knowing its historical antecedents.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_6",
+    "word": "precede",
+    "phonetic": "/prɪˈsiːd/",
+    "meaning": "[v.] 在...之前发生，先于，走在...前面",
+    "detail": "核心搭配: precede sb. / sth.; be preceded by; preceding chapter | 考点提示: 形近词辨析核心：precede (先于), proceed (推进), recede (后退)",
+    "example": "A brief introduction will precede the guest lecture.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_7",
+    "word": "proceed",
+    "phonetic": "/prəˈsiːd/",
+    "meaning": "[v.] 继续进行，推进，前进；行进",
+    "detail": "核心搭配: proceed with sth.; proceed to do sth.; proceed from | 考点提示: 常用搭配 proceed with 继续进行",
+    "example": "After a short break, the professor proceeded with his detailed explanation.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_8",
+    "word": "recede",
+    "phonetic": "/rɪˈsiːd/",
+    "meaning": "[v.] 后退，退去，渐弱（如潮水退去、记忆减退）",
+    "detail": "核心搭配: recede into the distance; recede from view; floodwaters recede | 考点提示: 侧重在空间或时间上向后退缩或逐渐模糊",
+    "example": "As the years passed, painful childhood memories began to recede into the background.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_9",
+    "word": "exceed",
+    "phonetic": "/ɪkˈsiːd/",
+    "meaning": "[v.] 超过，超出，超越（限度、预算、预期）",
+    "detail": "核心搭配: exceed expectations; exceed the speed limit; exceed one's authority | 考点提示: 派生词：exceedingly (adv. 极其，非常)",
+    "example": "The final sales volume significantly exceeded the company's annual target.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_10",
+    "word": "secede",
+    "phonetic": "/sɪˈsiːd/",
+    "meaning": "[v.] 脱离，退出（国家、政党、联盟）",
+    "detail": "核心搭配: secede from (a nation / federation); right to secede | 考点提示: 前缀 se- (分开) + cede (走)",
+    "example": "Several southern states voted to secede from the Union prior to the Civil War.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_11",
+    "word": "specimen",
+    "phonetic": "/ˈspesɪmən/",
+    "meaning": "[n.] 标本，样本，抽样",
+    "detail": "核心搭配: a biological specimen; collect / examine specimens; specimen bottle | 考点提示: Unit 1课文核心核心实物：解剖台上的鱼标本",
+    "example": "Professor Agassiz placed a fish specimen in front of the young student for observation.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_12",
+    "word": "explicit",
+    "phonetic": "/ɪkˈsplɪsɪt/",
+    "meaning": "[adj.] 明确的，清楚明白的，直截了当的",
+    "detail": "核心搭配: explicit instructions; make sth. explicit; explicit rules; explicitly state | 考点提示: 单元测试Q11核心考点，汉译英重点词；反义词 implicit",
+    "example": "She did not give explicit answers to every question, but encouraged students to think critically.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_13",
+    "word": "implicit",
+    "phonetic": "/ɪmˈplɪsɪt/",
+    "meaning": "[adj.] 含蓄的，暗示的，内含的；无保留的",
+    "detail": "核心搭配: implicit assumption; implicit agreement; implicit trust in sb. | 考点提示: 反义词：explicit",
+    "example": "There was an implicit understanding between the two researchers that they would share the credit.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_14",
+    "word": "entrust",
+    "phonetic": "/ɪnˈtrʌst/",
+    "meaning": "[v.] 委托，托付，把…托付给",
+    "detail": "核心搭配: entrust sb. with sth.; entrust sth. to sb. | 考点提示: 单元测试Q22考点，必背双重搭配：entrust sb. with sth. / entrust sth. to sb.",
+    "example": "The manager decided to entrust the crucial task to a reliable colleague with rich practical experience.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_15",
+    "word": "moisten",
+    "phonetic": "/ˈmɔɪsn/",
+    "meaning": "[v.] 弄湿，使湿润，微湿",
+    "detail": "核心搭配: moisten one's lips; moisten with water / alcohol | 考点提示: 后缀 -en 表致使；注意 t 不发音",
+    "example": "He had to constantly moisten the fish specimen with alcohol to keep it from drying out.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_16",
+    "word": "moist",
+    "phonetic": "/mɔɪst/",
+    "meaning": "[adj.] 微湿的，湿润的，潮湿的",
+    "detail": "核心搭配: moist eyes; moist air; keep the surface moist | 考点提示: 微湿偏舒服，区别 damp (阴湿不适)",
+    "example": "The soil in the greenhouse was kept moist and fertile for seed germination.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_17",
+    "word": "moisture",
+    "phonetic": "/ˈmɔɪstʃə(r)/",
+    "meaning": "[n.] 水分，湿度，潮气",
+    "detail": "核心搭配: moisture content; absorb / retain moisture; moisture cream | 考点提示: 派生词：moisturize (v. 保湿)",
+    "example": "Plants lose moisture through their leaves during hot summer afternoons.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_18",
+    "word": "stopper",
+    "phonetic": "/ˈstɒpə(r)/",
+    "meaning": "[n.] （瓶子等的）塞子；阻止物，妨碍物",
+    "detail": "核心搭配: pull out / replace the stopper; conversation stopper (冷场话) | 考点提示: 课文与题集高频词：conversation stopper 终结谈话的冷场话",
+    "example": "He pulled the glass stopper from the jar containing the preservative fluid.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_19",
+    "word": "plunge",
+    "phonetic": "/plʌndʒ/",
+    "meaning": "[v. / n.] v. 投身于，钻研；骤降，暴跌；跳入；n. 暴跌，跳水",
+    "detail": "核心搭配: plunge into (work / study / water); take the plunge (毅然决然尝试); plunge dramatically | 考点提示: 单元测试Q26核心考点，重点考查 plunge into 投身于",
+    "example": "After receiving the assignment, she plunged into her academic research without hesitation.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_20",
+    "word": "infectious",
+    "phonetic": "/ɪnˈfekʃəs/",
+    "meaning": "[adj.] 传染性的；（情绪、笑声等）有感染力的",
+    "detail": "核心搭配: infectious disease; infectious laughter / enthusiasm; highly infectious | 考点提示: 单元测试Q3核心考点；近义：contagious (接触传染的)",
+    "example": "His infectious enthusiasm inspired everyone on the project team to work harder.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_21",
+    "word": "gaze",
+    "phonetic": "/ɡeɪz/",
+    "meaning": "[v. / n.] 凝视，注视（长时间、平静、专注或赞叹地看）",
+    "detail": "核心搭配: gaze at / into; fix one's gaze upon; steadfast gaze | 考点提示: 四大看辨析之一：gaze(深情/专注凝视) vs stare(吃惊/失礼盯视) vs glance(扫视) vs glimpse(瞥见)",
+    "example": "The scientist gazed at the tiny details of the fish specimen for hours.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_22",
+    "word": "stare",
+    "phonetic": "/steə(r)/",
+    "meaning": "[v. / n.] 盯，凝视（多因惊讶、震惊或显得粗鲁）",
+    "detail": "核心搭配: stare at; stare blankly; stare in disbelief | 考点提示: 常含粗鲁或震惊情绪",
+    "example": "It is considered impolite to stare at strangers on the street.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_23",
+    "word": "glance",
+    "phonetic": "/ɡlɑːns/",
+    "meaning": "[v. / n.] 匆匆一瞥，扫视，粗略看",
+    "detail": "核心搭配: at first glance (乍一看); glance at one's watch; take a glance | 考点提示: 高频短语 at first glance",
+    "example": "At first glance the problem seemed straightforward, but deeper analysis revealed its complexity.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_24",
+    "word": "glimpse",
+    "phonetic": "/ɡlɪmps/",
+    "meaning": "[n. / v.] 一瞥，短暂瞥见（常指事物瞬间出现而未看清）",
+    "detail": "核心搭配: catch / get a glimpse of; a fleeting glimpse | 考点提示: 搭配 catch a glimpse of 瞥见",
+    "example": "Fans waited outside for hours just to catch a brief glimpse of the film director.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_25",
+    "word": "haunt",
+    "phonetic": "/hɔːnt/",
+    "meaning": "[v. / n.] v. （鬼魂）出没；（记忆、恐惧等）萦绕心头；n. 常去之处",
+    "detail": "核心搭配: haunt sb.'s memories; be haunted by; a favorite haunt | 考点提示: 题集高频词，多用于抽象记忆萦绕",
+    "example": "The tragic scene haunted his memory for decades after the event.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_26",
+    "word": "haunting",
+    "phonetic": "/ˈhɔːntɪŋ/",
+    "meaning": "[adj.] 令人难忘的，萦绕心头的，久久不散的（常指旋律、诗句、回忆）",
+    "detail": "核心搭配: a haunting melody / tune; haunting beauty; haunting memories | 考点提示: 常修饰 melody, music, beauty",
+    "example": "The film concluded with a haunting melody that brought tears to the audience's eyes.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_27",
+    "word": "haunted",
+    "phonetic": "/ˈhɔːntɪd/",
+    "meaning": "[adj.] 闹鬼的；忧心忡忡的，受困扰的",
+    "detail": "核心搭配: a haunted house; have a haunted look on one's face | 考点提示: 形容人面带忧虑或惊恐",
+    "example": "The soldier returned from the battlefield with a haunted expression in his eyes.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_28",
+    "word": "commend",
+    "phonetic": "/kəˈmend/",
+    "meaning": "[v.] 赞扬，表扬；推荐；得到赞同",
+    "detail": "核心搭配: commend sb. for sth.; commend itself to sb. (为某人所青睐); highly commended | 考点提示: 单元测试Q12核心考点；搭配 commend sb. for sth.",
+    "example": "The professor commended the students who had devoted themselves wholeheartedly to scientific inquiry.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_29",
+    "word": "steadfast",
+    "phonetic": "/ˈstedfɑːst/",
+    "meaning": "[adj.] 坚定的，不动摇的，始终如一的",
+    "detail": "核心搭配: steadfast faith / loyalty; steadfast gaze (凝神专注的目光); remain steadfast | 考点提示: 近义词：firm, resolute, unswerving",
+    "example": "Despite severe hardships, she remained steadfast in her commitment to medical ethics.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_30",
+    "word": "loath",
+    "phonetic": "/ləʊθ/",
+    "meaning": "[adj.] 不情愿的，勉强的 (与 reluctant 同义)",
+    "detail": "核心搭配: be loath to do sth. | 考点提示: 注意为形容词，不能带宾语，常作表语 be loath to do sth.",
+    "example": "He was loath to admit that his initial hypothesis had been completely wrong.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_31",
+    "word": "loathe",
+    "phonetic": "/ləʊð/",
+    "meaning": "[v.] 极度厌恶，憎恨 (与 detest, despise 同义)",
+    "detail": "核心搭配: loathe doing sth.; loathe sb. / sth. | 考点提示: 注意发音带浊辅音 /ð/，为及物动词",
+    "example": "They loathe cruelty in any form and advocate for animal welfare.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_32",
+    "word": "loathsome",
+    "phonetic": "/ˈləʊðsəm/",
+    "meaning": "[adj.] 令人作呕的，可憎的，极讨厌的",
+    "detail": "核心搭配: a loathsome creature; loathsome behavior / smell | 考点提示: 反义：delightful, pleasant",
+    "example": "The tyrant was remembered throughout history for his loathsome crimes.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_33",
+    "word": "forbid",
+    "phonetic": "/fəˈbɪd/",
+    "meaning": "[v.] 禁止，不许（最通用口语与正式词）",
+    "detail": "核心搭配: forbid sb. to do sth.; forbid doing sth.; God forbid! | 考点提示: 常考结构 forbid sb. to do / forbid sb. from doing",
+    "example": "School regulations strictly forbid students from using mobile phones during exams.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_34",
+    "word": "prohibit",
+    "phonetic": "/prəˈhɪbɪt/",
+    "meaning": "[v.] （通过法律、法规、官方条令）禁止，阻止",
+    "detail": "核心搭配: prohibit sb. from doing sth.; strictly prohibited; law prohibits | 考点提示: 侧重官方法律法规约束，搭配 prohibit sb. from doing",
+    "example": "Municipal laws prohibit smoking in all indoor public spaces and public transport.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_35",
+    "word": "ban",
+    "phonetic": "/bæn/",
+    "meaning": "[v. / n.] （官方或社会舆论）明令取缔，全面查禁；禁令",
+    "detail": "核心搭配: impose / lift a ban on sth.; ban sb. from doing sth. | 考点提示: 强调社会舆论与官方全面禁止",
+    "example": "The government decided to impose a total ban on single-use plastics.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_36",
+    "word": "bar",
+    "phonetic": "/bɑː(r)/",
+    "meaning": "[v. / n.] v. 阻挡，阻止；封锁；n. 酒吧；门闩；障碍",
+    "detail": "核心搭配: bar sb. from doing sth.; barred windows; behind bars (在狱中) | 考点提示: 搭配 bar sb. from doing sth.",
+    "example": "Protesters barred the entrance to the office building, preventing staff from entering.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_37",
+    "word": "interdict",
+    "phonetic": "/ˈɪntədɪkt/",
+    "meaning": "[v. / n.] （法律/官方/军事）正式禁止，封锁，阻断",
+    "detail": "核心搭配: interdict the drug trade; judicial interdict; interdict supply routes | 考点提示: 极正式书面语及法律/军事术语",
+    "example": "Naval forces were dispatched to interdict shipments of contraband across the sea.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_38",
+    "word": "conspicuous",
+    "phonetic": "/kənˈspɪkjuəs/",
+    "meaning": "[adj.] 显眼的，显著的，引人注目的（易于看见或引起注意）",
+    "detail": "核心搭配: conspicuous consumption (炫耀性消费); be conspicuous by one's absence; highly conspicuous | 考点提示: 近义词：noticeable, eye-catching",
+    "example": "The bright red sign was placed in a conspicuous position near the main gate.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_39",
+    "word": "visible",
+    "phonetic": "/ˈvɪzəbl/",
+    "meaning": "[adj.] 看得见的，可见的；明显的",
+    "detail": "核心搭配: visible to the naked eye; highly visible; visible progress | 考点提示: 单元测试Q7核心考点；反义词 invisible",
+    "example": "The microscopic organisms are not visible to the naked human eye.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_40",
+    "word": "visibly",
+    "phonetic": "/ˈvɪzəbli/",
+    "meaning": "[adv.] 明显地，显而易见地",
+    "detail": "核心搭配: visibly shaken / upset; visibly relieved | 考点提示: 常修饰情感状态形容词",
+    "example": "She was visibly shaken after hearing the alarming news from home.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_41",
+    "word": "invisible",
+    "phonetic": "/ɪnˈvɪzəbl/",
+    "meaning": "[adj.] 看不见的，无形的",
+    "detail": "核心搭配: invisible hand (看不见的手); invisible bacteria; invisible rays | 考点提示: 常用于隐喻或科学语境",
+    "example": "Ultraviolet rays are completely invisible to the human eye but can damage skin.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_42",
+    "word": "invisibly",
+    "phonetic": "/ɪnˈvɪzəbli/",
+    "meaning": "[adv.] 看不见地，暗中，无形地",
+    "detail": "核心搭配: operate invisibly; invisibly connected | 考点提示: 副词形式",
+    "example": "The underlying algorithms work invisibly in the background to filter online content.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_43",
+    "word": "obvious",
+    "phonetic": "/ˈɒbviəs/",
+    "meaning": "[adj.] 明显的，显而易见的（一目了然毋庸置疑）",
+    "detail": "核心搭配: an obvious fact / mistake; for obvious reasons; it is obvious that... | 考点提示: 最通用的'明显'词汇",
+    "example": "It was obvious from her enthusiastic tone that she loved her academic major.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_44",
+    "word": "apparent",
+    "phonetic": "/əˈpærənt/",
+    "meaning": "[adj.] 显而易见的；表面上的，貌似的",
+    "detail": "核心搭配: it became apparent that; apparent contradiction; for no apparent reason | 考点提示: 双重含义：显而易见 vs 表面貌似（apparent vs real）",
+    "example": "It soon became apparent that the initial calculations contained significant errors.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_45",
+    "word": "prominent",
+    "phonetic": "/ˈprɒmɪnənt/",
+    "meaning": "[adj.] 突出的，显著的；著名的，杰出的",
+    "detail": "核心搭配: play a prominent role; a prominent scholar / feature; prominently displayed | 考点提示: 既指物理上突出，也指社会地位杰出",
+    "example": "He has played a prominent role in promoting international educational exchanges.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_46",
+    "word": "striking",
+    "phonetic": "/ˈstraɪkɪŋ/",
+    "meaning": "[adj.] 引人注目的，异乎寻常的，深刻醒目的",
+    "detail": "核心搭配: a striking resemblance (惊人相似); a striking difference; striking features | 考点提示: 经典搭配：striking resemblance / contrast",
+    "example": "There is a striking resemblance between the two historical events.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_47",
+    "word": "wretched",
+    "phonetic": "/ˈretʃɪd/",
+    "meaning": "[adj.] 极不幸的，悲惨的，难受的；恶劣的，糟糕的",
+    "detail": "核心搭配: feel wretched; live in wretched poverty; wretched conditions | 考点提示: 单元测试Q8考点，汉译英重点词汇",
+    "example": "Occasionally we would feel wretched because we had to spend hours reading the difficult text.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_48",
+    "word": "wretchedly",
+    "phonetic": "/ˈretʃɪdli/",
+    "meaning": "[adv.] 悲惨地，可怜地，极其",
+    "detail": "核心搭配: wretchedly poor; feel wretchedly ill | 考点提示: 副词形式",
+    "example": "They lived wretchedly in makeshift tents during the harsh winter months.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_49",
+    "word": "assure",
+    "phonetic": "/əˈʃʊə(r)/",
+    "meaning": "[v.] 向…保证，使确信（侧重打消某人顾虑）",
+    "detail": "核心搭配: assure sb. of sth.; assure sb. that...; rest assured (请放心) | 考点提示: 宾语必须接人：assure sb. that / assure sb. of sth.",
+    "example": "The doctor assured the anxious parents that the surgery had been completely successful.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_50",
+    "word": "ensure",
+    "phonetic": "/ɪnˈʃʊə(r)/",
+    "meaning": "[v.] 确保，保证（确保事情实现或发生）",
+    "detail": "核心搭配: ensure that...; ensure success / safety; take steps to ensure | 考点提示: 宾语接事物或从句：ensure that / ensure sth.（不接人）",
+    "example": "We must take immediate measures to ensure that academic regulations are strictly followed.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_51",
+    "word": "reassure",
+    "phonetic": "/ˌriːəˈʃʊə(r)/",
+    "meaning": "[v.] 使安心，使消除疑虑（使恢复信心和平静）",
+    "detail": "核心搭配: reassure sb. about sth.; reassure sb. that...; smile reassuringly | 考点提示: 单元测试Q20核心考点，重点指'使消退忧虑'",
+    "example": "The tutor tried to reassure the nervous freshman that everyone makes mistakes at the start.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_52",
+    "word": "reassuring",
+    "phonetic": "/ˌriːəˈʃʊərɪŋ/",
+    "meaning": "[adj.] 令人安心的，宽慰的",
+    "detail": "核心搭配: a reassuring smile / voice / message; reassuring news | 考点提示: 修饰事物或举止",
+    "example": "Hearing her mother's calm voice on the telephone was extremely reassuring.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_53",
+    "word": "symmetrical",
+    "phonetic": "/sɪˈmetrɪkl/",
+    "meaning": "[adj.] 对称的，匀称的",
+    "detail": "核心搭配: symmetrical organs; bilateral symmetry; perfectly symmetrical | 考点提示: 课文核心生物学考点：课文中提及的'对称器官'",
+    "example": "Professor Agassiz pointed out that the fish possessed symmetrical organs on both sides.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_54",
+    "word": "catalogue",
+    "phonetic": "/ˈkætəlɒɡ/",
+    "meaning": "[n. / v.] n. 目录，全套清单；v. 编入目录，系统列出",
+    "detail": "核心搭配: library catalogue; mail-order catalogue; catalogue all known species | 考点提示: 也可拼写为 catalog",
+    "example": "Biologists spent several decades cataloguing all local marine species.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_55",
+    "word": "inestimable",
+    "phonetic": "/ɪnˈestɪməbl/",
+    "meaning": "[adj.] 无法估量的，极其宝贵的（价值巨大到无法计算）",
+    "detail": "核心搭配: inestimable value / worth; of inestimable benefit to | 考点提示: 四大价值词辨析之一：inestimable (无法估量的) vs invaluable (极其宝贵的) vs priceless (无价的) vs worthless (毫无价值的)",
+    "example": "The ancient manuscripts are of inestimable historical and cultural value.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_56",
+    "word": "invaluable",
+    "phonetic": "/ɪnˈvæljuəbl/",
+    "meaning": "[adj.] 极宝贵的，极其有用的（切勿误判为'不值钱'）",
+    "detail": "核心搭配: invaluable advice / assistance; prove invaluable to | 考点提示: 易错警示：invaluable 意为'极宝贵的'，而不是 worthless",
+    "example": "Her practical experience in fieldwork proved invaluable during the archaeological project.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_57",
+    "word": "priceless",
+    "phonetic": "/ˈpraɪsləs/",
+    "meaning": "[adj.] 无价的，极其珍贵的；滑稽可笑的",
+    "detail": "核心搭配: priceless art treasures; priceless moments / advice | 考点提示: 近义词：invaluable, beyond price",
+    "example": "The museum houses a priceless collection of Renaissance oil paintings.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_58",
+    "word": "worthless",
+    "phonetic": "/ˈwɜːθləs/",
+    "meaning": "[adj.] 无价值的，毫无用处的，一文不值的",
+    "detail": "核心搭配: worthless paper / promise; totally worthless | 考点提示: 反义词：priceless, invaluable",
+    "example": "Without accurate data, all these theoretical models are completely worthless.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_59",
+    "word": "legacy",
+    "phonetic": "/ˈleɡəsi/",
+    "meaning": "[n.] 遗产，遗赠；历史留给后世的产物/精神财富",
+    "detail": "核心搭配: cultural / historical legacy; leave a lasting legacy; legacy of colonialism | 考点提示: 课文课后核心主题词",
+    "example": "Agassiz's scientific legacy continues to inspire generations of modern zoologists.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_60",
+    "word": "resemble",
+    "phonetic": "/rɪˈzembl/",
+    "meaning": "[v.] 像，与…相似（不用于被动语态或进行时）",
+    "detail": "核心搭配: closely / strongly resemble sb.; resemble each other | 考点提示: 语法警示：resemble 不用于被动语态，也不与 with 连用",
+    "example": "The newborn dolphin closely resembled its mother in color and form.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_61",
+    "word": "resemblance",
+    "phonetic": "/rɪˈzembləns/",
+    "meaning": "[n.] 相似，形似，相似之处",
+    "detail": "核心搭配: bear a strong resemblance to; striking resemblance; little resemblance | 考点提示: 核心搭配：bear a resemblance to 与…有相似之处",
+    "example": "There is a striking resemblance between the architecture of the two ancient cities.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_62",
+    "word": "differ",
+    "phonetic": "/ˈdɪfə(r)/",
+    "meaning": "[v.] 不同，相异，有区别；产生分歧",
+    "detail": "核心搭配: differ from sb./sth.; differ in (size / opinion); beg to differ | 考点提示: 搭配 differ from (区别于) / differ in (在…方面不同)",
+    "example": "The two subspecies differ significantly in the structure of their tail fins.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_63",
+    "word": "distinction",
+    "phonetic": "/dɪˈstɪŋkʃn/",
+    "meaning": "[n.] 区别，差别；优秀，杰出；特点",
+    "detail": "核心搭配: make / draw a distinction between; a person of distinction; with distinction | 考点提示: 搭配 draw a distinction between",
+    "example": "Philosophers often draw a clear distinction between moral facts and subjective opinions.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_64",
+    "word": "dissection",
+    "phonetic": "/dɪˈsekʃn/",
+    "meaning": "[n.] 解剖，生物解剖；仔细剖析",
+    "detail": "核心搭配: dissection table (解剖台); perform a dissection; rigorous dissection of the text | 考点提示: 课文高频场景词：解剖与显微镜观察",
+    "example": "The biology laboratory had several fish specimens lined up on the dissection table.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_65",
+    "word": "dissect",
+    "phonetic": "/dɪˈsekt/",
+    "meaning": "[v.] 解剖；仔细剖析，仔细审查",
+    "detail": "核心搭配: dissect an animal / frog; dissect a poem / argument | 考点提示: 引申为文学或逻辑上的深度剖析",
+    "example": "Students were asked to dissect the poem line by line to understand its metaphorical structure.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_66",
+    "word": "aversion",
+    "phonetic": "/əˈvɜːʃn/",
+    "meaning": "[n.] 厌恶，反感，极度讨厌",
+    "detail": "核心搭配: have / hold an aversion to; a deep-rooted aversion; risk aversion | 考点提示: 单元测试Q23、Q32核心考点，必背搭配 hold an aversion to",
+    "example": "Many people hold a strong aversion to online gossip because it often spreads false rumors.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_67",
+    "word": "bid",
+    "phonetic": "/bɪd/",
+    "meaning": "[n. / v.] n. 企图，努力；投标，出价；v. 出价；命令，致意",
+    "detail": "核心搭配: submit a bid for; make a bid for power; in a bid to do sth.; bid farewell to | 考点提示: 单元测试Q13核心考点，必背搭配 submit a bid for",
+    "example": "Several construction companies submitted a bid for the municipal renewal project.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_68",
+    "word": "reluctance",
+    "phonetic": "/rɪˈlʌktəns/",
+    "meaning": "[n.] 不情愿，勉强",
+    "detail": "核心搭配: show reluctance to do sth.; overcome one's reluctance; with reluctance | 考点提示: 单元测试Q14核心考点",
+    "example": "He accepted the promotion with obvious reluctance, knowing the heavy stress involved.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_69",
+    "word": "reluctant",
+    "phonetic": "/rɪˈlʌktənt/",
+    "meaning": "[adj.] 不情愿的，勉强的",
+    "detail": "核心搭配: be reluctant to do sth.; reluctant consent | 考点提示: 搭配 be reluctant to do sth.",
+    "example": "Many employees were reluctant to adopt the new digital tracking system.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_70",
+    "word": "feature",
+    "phonetic": "/ˈfiːtʃə(r)/",
+    "meaning": "[n. / v.] n. 特征，特色；容貌；v. 以…为特色，重点介绍",
+    "detail": "核心搭配: special / key feature; feature story; prominently feature sb. | 考点提示: 单元测试Q6核心考点",
+    "example": "The spacious green gardens are a special feature of this historical university campus.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_71",
+    "word": "energetic",
+    "phonetic": "/ˌenəˈdʒetɪk/",
+    "meaning": "[adj.] 精力充沛的，充满活力的，积极的",
+    "detail": "核心搭配: energetic youth / team; take energetic measures; remain energetic | 考点提示: 单元测试Q9核心考点；修饰人或行动",
+    "example": "The energetic youth volunteer team has devoted plenty of time to community services.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_72",
+    "word": "linger",
+    "phonetic": "/ˈlɪŋɡə(r)/",
+    "meaning": "[v.] 徘徊，逗留；（气味、记忆、病痛等）久久不散",
+    "detail": "核心搭配: linger on / over; linger in the mind; a lingering doubt / smile | 考点提示: 单元测试Q24核心考点，常指气味、旋律或记忆久久留存",
+    "example": "The fragrant aroma of fresh coffee lingered in the kitchen for hours.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_73",
+    "word": "relate",
+    "phonetic": "/rɪˈleɪt/",
+    "meaning": "[v.] 把…联系起来；叙述，讲述；产生共鸣，理解",
+    "detail": "核心搭配: relate A to B; relate to sb./sth.; closely related | 考点提示: 单元测试Q10核心考点，必背搭配 relate...to...",
+    "example": "The professor encouraged students to relate scientific theories to everyday observations.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_74",
+    "word": "infinite",
+    "phonetic": "/ˈɪnfɪnət/",
+    "meaning": "[adj.] 无限的，无穷的，极大的",
+    "detail": "核心搭配: infinite variety; infinite patience; infinite wisdom; infinite possibilities | 考点提示: 单元测试Q1核心考点，经典搭配 infinite variety",
+    "example": "The most amazing thing about natural ecosystems is their infinite variety.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_75",
+    "word": "infinitely",
+    "phonetic": "/ˈɪnfɪnətli/",
+    "meaning": "[adv.] 无限地，极其，远远地",
+    "detail": "核心搭配: infinitely better; infinitely superior; infinitely complex | 考点提示: 常修饰比较级表示'…得多'",
+    "example": "Real-world engineering challenges are infinitely more complex than textbook examples.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_76",
+    "word": "inquire",
+    "phonetic": "/ɪnˈkwaɪə(r)/",
+    "meaning": "[v.] 询问，打听；调查，探究",
+    "detail": "核心搭配: inquire as to / about sth.; inquire into the nature of things; inquire after sb. | 考点提示: 单元测试Q4核心考点，汉译英重点句必备：inquire into 探究事物本质",
+    "example": "In the course of seeking answers, we learned to inquire into the nature of things.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_77",
+    "word": "internal",
+    "phonetic": "/ɪnˈtɜːnl/",
+    "meaning": "[adj.] 内部的；国内的；体内的；内在的",
+    "detail": "核心搭配: internal organs; internal market / affairs; internal structure | 考点提示: 单元测试Q17考点；反义词 external",
+    "example": "Biologists carefully examined both the external appearance and internal organs of the specimen.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_78",
+    "word": "external",
+    "phonetic": "/ɪkˈstɜːnl/",
+    "meaning": "[adj.] 外部的，外表的，外来的",
+    "detail": "核心搭配: external factors; external pressure; external appearance | 考点提示: 反义词 internal",
+    "example": "Students should not judge a specimen merely by its external features.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_79",
+    "word": "misery",
+    "phonetic": "/ˈmɪzəri/",
+    "meaning": "[n.] 痛苦，苦难；悲惨的境遇；穷困",
+    "detail": "核心搭配: live in misery; plunge into misery; cause sb. great misery | 考点提示: 单元测试Q21、Q34核心考点",
+    "example": "War and natural disasters always bring untold misery to innocent civilian populations.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_80",
+    "word": "occasional",
+    "phonetic": "/əˈkeɪʒənl/",
+    "meaning": "[adj.] 偶尔的，间或发生的，临时的",
+    "detail": "核心搭配: occasional visits; an occasional cigarette; for occasional use | 考点提示: 形近形容词，修饰名词",
+    "example": "Apart from an occasional misunderstanding, the two roommates got along quite well.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_81",
+    "word": "occasionally",
+    "phonetic": "/əˈkeɪʒnəli/",
+    "meaning": "[adv.] 偶尔，有时，间或",
+    "detail": "核心搭配: happen occasionally; occasionally feel wretched | 考点提示: 单元测试Q18考点，汉译英重点副词",
+    "example": "Occasionally we would feel wretched because we had to spend a lot of time reading the text.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_82",
+    "word": "perplexity",
+    "phonetic": "/pəˈpleksəti/",
+    "meaning": "[n.] 困惑，迷惘，不知所措",
+    "detail": "核心搭配: with growing perplexity; in deep perplexity; resolve perplexities | 考点提示: 单元测试Q5考点，汉译英核心表达：resolve perplexities (解开困惑)",
+    "example": "He began counting the scales, and then, with growing perplexity, counted them a second time.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_83",
+    "word": "relief",
+    "phonetic": "/rɪˈliːf/",
+    "meaning": "[n.] 宽慰，解脱；（痛苦/焦虑的）缓解；救济品",
+    "detail": "核心搭配: breathe a sigh of relief; to one's great relief; pain relief; disaster relief | 考点提示: 单元测试Q16考点，必背搭配 breathe a sigh of relief",
+    "example": "Hearing that all team members were safe, she breathed a deep sigh of relief.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_84",
+    "word": "subsequent",
+    "phonetic": "/ˈsʌbsɪkwənt/",
+    "meaning": "[adj.] 随后的，后来的",
+    "detail": "核心搭配: subsequent events / developments; subsequent years; subsequent to (在…之后) | 考点提示: 单元测试Q19考点，汉译英重点词",
+    "example": "This critical ability proved exceptionally useful to my subsequent years of study and work.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_85",
+    "word": "venture",
+    "phonetic": "/ˈventʃə(r)/",
+    "meaning": "[n. / v.] n. 冒险活动，风险投资；v. 敢于去，冒…险，冒险提出",
+    "detail": "核心搭配: joint venture (合资企业); business venture; venture into / upon; venture an opinion | 考点提示: 单元测试Q25考点，搭配 venture into 勇于涉足",
+    "example": "The explorers decided to venture into the uncharted jungle despite severe storm warnings.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_86",
+    "word": "compress",
+    "phonetic": "/kəmˈpres/ (v.) /ˈkɒmpres/ (n.)",
+    "meaning": "[v. / n.] v. 压缩，压紧；精简；n. 敷布，止血垫",
+    "detail": "核心搭配: compress data; compress air; cold / hot compress; compress into | 考点提示: 题集选项高频词",
+    "example": "The author managed to compress an entire historical era into a concise 200-page overview.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_87",
+    "word": "annoy",
+    "phonetic": "/əˈnɔɪ/",
+    "meaning": "[v.] 使恼怒，打扰，使烦恼",
+    "detail": "核心搭配: annoy sb.; be annoyed by / at / with | 考点提示: 动词原形",
+    "example": "The constant background buzzing sound began to annoy the students in the library.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_88",
+    "word": "annoyed",
+    "phonetic": "/əˈnɔɪd/",
+    "meaning": "[adj.] 感到恼火的，生气的，不悦的",
+    "detail": "核心搭配: be / feel annoyed at / with; visibly annoyed | 考点提示: 单元测试Q27考点，汉译英重点词",
+    "example": "Sometimes we felt wretched and even a bit annoyed because we were left to our own devices.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_89",
+    "word": "fluid",
+    "phonetic": "/ˈfluːɪd/",
+    "meaning": "[n. / adj.] n. 流体，液体；adj. 流畅的，流动的，易变的",
+    "detail": "核心搭配: preservative fluid; fluid motion / handwriting; body fluids | 考点提示: 课文与题集高频词",
+    "example": "The specimen jar was filled with a special preserving fluid to protect the fish tissues.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_90",
+    "word": "fragrant",
+    "phonetic": "/ˈfreɪɡrənt/",
+    "meaning": "[adj.] 芳香的，香气宜人的",
+    "detail": "核心搭配: fragrant flowers / tea; a fragrant scent / aroma | 考点提示: 派生词：fragrance (n. 芳香，香水)",
+    "example": "The garden was filled with the delightful fragrance of blooming jasmine.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_91",
+    "word": "fringed",
+    "phonetic": "/frɪndʒd/",
+    "meaning": "[adj.] 边缘有饰边的，带流苏的，环绕的",
+    "detail": "核心搭配: fringed with trees; long-fringed eyelashes; fringed rug | 考点提示: 课文描写词汇",
+    "example": "The ancient lake was beautifully fringed with dense willow trees and wild reeds.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_92",
+    "word": "mute",
+    "phonetic": "/mjuːt/",
+    "meaning": "[adj. / n. / v.] adj. 哑的，沉默的，无声的；n. 哑巴；v. 消音",
+    "detail": "核心搭配: mute companion (无声伴侣); remain mute; mute the television | 考点提示: 课文核心意象：mute companion 指实验台上的死鱼",
+    "example": "For three consecutive days, the dead fish served as his only mute companion in the lab.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_93",
+    "word": "sacred",
+    "phonetic": "/ˈseɪkrɪd/",
+    "meaning": "[adj.] 神圣的，不容亵渎的，极其庄严的",
+    "detail": "核心搭配: sacred duty / right; sacred cow (不可触及的事物); hold sth. sacred | 考点提示: 近义词：holy, solemn",
+    "example": "Scholars consider the pursuit of objective truth to be a sacred responsibility.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_94",
+    "word": "aspiration",
+    "phonetic": "/ˌæspəˈreɪʃn/",
+    "meaning": "[n.] 抱负，志向，渴望",
+    "detail": "核心搭配: career / academic aspirations; have high aspirations; fulfill one's aspirations | 考点提示: 近义词：ambition, goal",
+    "example": "Young students entered the research institute with high aspirations to conquer cancer.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_95",
+    "word": "earnestly",
+    "phonetic": "/ˈɜːnɪstli/",
+    "meaning": "[adv.] 认真地，诚挚地，由衷地，恳切地",
+    "detail": "核心搭配: earnestly requested; listen / speak earnestly; earnestly hope | 考点提示: 单元测试Q2核心考点，正式客套邀请常用",
+    "example": "You are earnestly requested to attend the upcoming academic symposium on time.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_96",
+    "word": "earnest",
+    "phonetic": "/ˈɜːnɪst/",
+    "meaning": "[adj.] 认真的，真诚的，诚恳的",
+    "detail": "核心搭配: in earnest (认真地，严肃地); an earnest young scholar; earnest endeavor | 考点提示: 核心成语：in earnest 认真地",
+    "example": "When the semester began in earnest, students were expected to conduct independent research.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_97",
+    "word": "forgo",
+    "phonetic": "/fɔːˈɡəʊ/",
+    "meaning": "[v.] 放弃，舍弃（本可享用的舒适或乐趣）",
+    "detail": "核心搭配: forgo one's usual break; forgo an opportunity; forgo leisure time | 考点提示: 词汇速测(Q27/Ans27) [模块一：大纲核心高频词汇]",
+    "example": "To meet the deadline, the team decided to forgo its usual afternoon break.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_98",
+    "word": "hop",
+    "phonetic": "/hɒp/",
+    "meaning": "[v./n.] 快速跳上/跳进；单脚跳；快速移动",
+    "detail": "核心搭配: hop in (跳进车内/迅速加入); hop on a bus; hop from one app to another | 考点提示: 单元测试(Q32) [模块二：题集考点与核心拓展]",
+    "example": "The ocean may be a little colder than usual, but I think you might still be able to hop in.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_99",
+    "word": "out of touch",
+    "phonetic": "/aʊt əv tʌtʃ/",
+    "meaning": "[phrase] 脱节，失去联系；不了解实际情况",
+    "detail": "核心搭配: feel isolated and out of touch; be out of touch with reality | 考点提示: 单元测试(Q16) [模块二：题集考点与核心拓展]",
+    "example": "Telecommuting makes many employees feel isolated and out of touch, leading to decreased motivation.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_100",
+    "word": "in public",
+    "phonetic": "/ɪn ˈpʌblɪk/",
+    "meaning": "[phrase] 当众，公开地（与 in private 相对）",
+    "detail": "核心搭配: appear in public; speak in public; in public life | 考点提示: 单元测试(Q23) [模块二：题集考点与核心拓展]",
+    "example": "Camilla was terrified when she first began appearing in public with Charles.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_101",
+    "word": "urgent",
+    "phonetic": "/ˈɜːdʒənt/",
+    "meaning": "[adj.] 紧急的，迫切的",
+    "detail": "核心搭配: in urgent need of; urgent emails / deadline; urgent matters | 考点提示: 单元测试(Q19) / 课件(P9) [模块二：题集考点与核心拓展]",
+    "example": "A government official said the authorities were in urgent need of tents, medical personnel and equipment.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_102",
+    "word": "environmental",
+    "phonetic": "/ɪnˌvaɪrənˈmentl/",
+    "meaning": "[adj.] 自然环境的，环境的",
+    "detail": "核心搭配: environmental pressure; environmental protection; environmental damage | 考点提示: 单元测试(Q2) [模块二：题集考点与核心拓展]",
+    "example": "Experts said the government had been forced to develop new energy due to shortages of resources and environmental pressure.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_103",
+    "word": "down (drink)",
+    "phonetic": "/daʊn/",
+    "meaning": "[v.] 一饮而尽，吞下（一口气喝完饮料）",
+    "detail": "核心搭配: down a drink; down a cup of coffee; down a glass of water | 考点提示: 课件(P4, P10) [模块三：动作与主题辨析组]",
+    "example": "Grab a piece of toast and down a cup of coffee while checking the weather and traffic.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_104",
+    "word": "gulp down",
+    "phonetic": "/ɡʌlp daʊn/",
+    "meaning": "[phr v.] 大口吞咽，大口喝下（大口快速咽下）",
+    "detail": "核心搭配: swallow food or drink quickly in large mouthfuls; gulp down water | 考点提示: 课件(P4) [模块三：动作与主题辨析组]",
+    "example": "He gulped down the medicine and rushed out the door.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_105",
+    "word": "wolf down",
+    "phonetic": "/wʊlf daʊn/",
+    "meaning": "[phr v.] 狼吞虎咽，饥不择食地吃光",
+    "detail": "核心搭配: eat food very quickly, often because hungry; wolf down a burger | 考点提示: 课件(P4) [模块三：动作与主题辨析组]",
+    "example": "The boy wolfed down three slices of pizza in two minutes.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_106",
+    "word": "shovel down / shovel in",
+    "phonetic": "/ˈʃʌvl daʊn/",
+    "meaning": "[phr v.] 狼吞虎咽地大口扒饭（形象而稍带贬义）",
+    "detail": "核心搭配: eat quickly, putting large amounts into mouth; shovel food in | 考点提示: 课件(P4) [模块三：动作与主题辨析组]",
+    "example": "He barely tasted his lunch, just shoveling down the rice to get back to his desk.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_107",
+    "word": "hurry",
+    "phonetic": "/ˈhʌri/",
+    "meaning": "[v./n.] 匆忙，催促（常用通用词，快速行动）",
+    "detail": "核心搭配: hurry home; hurry through breakfast; in a hurry | 考点提示: 课件(P6, P10) [模块三：动作与主题辨析组]",
+    "example": "We hurried them through breakfast so they wouldn't miss the school bus.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_108",
+    "word": "rush",
+    "phonetic": "/rʌʃ/",
+    "meaning": "[v./n.] 仓促，急促（伴随时间压力，更容易出错）",
+    "detail": "核心搭配: rush your work; rush hour; in a rush | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
+    "example": "Don't rush your work, or you are more likely to make careless mistakes.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_109",
+    "word": "sprint",
+    "phonetic": "/sprɪnt/",
+    "meaning": "[v./n.] 短距离全速冲刺，奋力冲刺",
+    "detail": "核心搭配: sprint for the bus; sprint to the finish line; 100m sprint | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
+    "example": "She sprinted for the bus just as the driver was closing the doors.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_110",
+    "word": "race",
+    "phonetic": "/reɪs/",
+    "meaning": "[v./n.] 疾走，竞争飞奔；与时间赛跑",
+    "detail": "核心搭配: race against time / against the clock; rat race | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
+    "example": "He raced against the clock to complete the project before the midnight deadline.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_111",
+    "word": "zoom",
+    "phonetic": "/zuːm/",
+    "meaning": "[v.] 呼啸飞驰，疾速掠过",
+    "detail": "核心搭配: zoom past; zoom through each day; zoom along the highway | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
+    "example": "In our modern routine, we find ourselves zooming through each day without reflection.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_112",
+    "word": "hightail it",
+    "phonetic": "/ˈhaɪteɪl ɪt/",
+    "meaning": "[idiom] (非正式) 飞速赶往，火速离开",
+    "detail": "核心搭配: hightail it home / out of there; informal for leaving quickly | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
+    "example": "As soon as the bell rang, the students hightailed it home for the holiday.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_113",
+    "word": "quicken",
+    "phonetic": "/ˈkwɪkən/",
+    "meaning": "[v.] 加快，加速（具文学色彩，常修饰步伐、心跳、节奏）",
+    "detail": "核心搭配: quicken one's pace; quicken one's heartbeat; quicken the tempo | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
+    "example": "The lively music quickened the tempo of the entire party.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_114",
+    "word": "crank up",
+    "phonetic": "/kræŋk ʌp/",
+    "meaning": "[phr v.] 调高，加大（像旋转机器旋钮般提升速度/音量）",
+    "detail": "核心搭配: crank up the speed / volume / pressure; crank sth. to a level | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
+    "example": "The factory cranked up production to meet the sudden surge in holiday orders.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_115",
+    "word": "speed up / speed-up",
+    "phonetic": "/spiːd ʌp/",
+    "meaning": "[v./n.] 加速，加快；增速（最中性常见的表达）",
+    "detail": "核心搭配: speed up the pace; a general speed-up of society | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
+    "example": "Technological innovations have led to a noticeable speed-up in our daily routines.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_116",
+    "word": "rev up",
+    "phonetic": "/rev ʌp/",
+    "meaning": "[phr v.] 使加速运转，使活跃（机械引擎轰鸣提速意象）",
+    "detail": "核心搭配: rev up an engine; rev up the economy; rev up marketing efforts | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
+    "example": "The company revved up its promotional campaign right before the double eleven shopping festival.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_117",
+    "word": "accelerate",
+    "phonetic": "/əkˈseləreɪt/",
+    "meaning": "[v.] 加速，促进（正式书面语，用于物理速度或发展变革）",
+    "detail": "核心搭配: accelerate the process of change; accelerate economic growth | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
+    "example": "Digital tools have accelerated the pace at which business communication happens.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_118",
+    "word": "device",
+    "phonetic": "/dɪˈvaɪs/",
+    "meaning": "[n.] 设备，仪器，装置（中性、通用的客观词汇）",
+    "detail": "核心搭配: timekeeping device; electronic device; a device for measuring time | 考点提示: 课件(P28) [模块三：动作与主题辨析组]",
+    "example": "A clock is a traditional timekeeping device, whereas a smartphone is a multi-purpose tool.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_119",
+    "word": "gadget",
+    "phonetic": "/ˈɡædʒɪt/",
+    "meaning": "[n.] 精巧的小器具，小玩意（巧妙实用但非生存必需品）",
+    "detail": "核心搭配: electronic gadget; handy gadget; smartwatch as a gadget | 考点提示: 课件(P28) [模块三：动作与主题辨析组]",
+    "example": "A smartwatch is a useful gadget, but having too many gadgets can be distracting.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_120",
+    "word": "contrivance",
+    "phonetic": "/kənˈtraɪvəns/",
+    "meaning": "[n.] 巧妙器械，人造装置（带有人为设计或刻意控制意涵）",
+    "detail": "核心搭配: mechanical contrivances; deliberate contrivance | 考点提示: 课件(P28, P29) [模块三：动作与主题辨析组]",
+    "example": "Instead of following natural rhythms, humanity is controlled by mechanical contrivances.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_121",
+    "word": "-athon",
+    "phonetic": "/əθɒn/",
+    "meaning": "[suffix] 表示“长时间、大规模、高强度的马拉松式活动”",
+    "detail": "核心搭配: hackathon (黑客松); readathon (阅读马拉松); exam-athon (备考连轴转) | 考点提示: 课件(P18) [模块三：动作与主题辨析组]",
+    "example": "The week before final exams always feels like an exhausting exam-athon.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_122",
+    "word": "fulfill / fulfillment",
+    "phonetic": "/fʊlˈfɪl/",
+    "meaning": "[v./n.] 使满足，实现；成就感，充实感",
+    "detail": "核心搭配: fulfill one's potential; a fulfilling life; sense of fulfillment | 考点提示: 课件(P1, P3) [模块三：动作与主题辨析组]",
+    "example": "Why life in the fast lane fails to fulfill us: the faster we go, the further behind we fall.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_123",
+    "word": "live in the fast lane",
+    "phonetic": "/lɪv ɪn ðə fɑːst leɪn/",
+    "meaning": "[idiom] 过快节奏、刺激且高风险的生活",
+    "detail": "核心搭配: life in the fast lane; fast-lane lifestyle | 考点提示: 课件(P1, P2) [模块三：动作与主题辨析组]",
+    "example": "To live in the fast lane means leading a busy, exciting, and sometimes exhausting existence.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_124",
+    "word": "proliferate / proliferation",
+    "phonetic": "/prəˈlɪfəreɪt/",
+    "meaning": "[v./n.] 急剧扩散，迅速激增，激增",
+    "detail": "核心搭配: the proliferation of apps/devices/innovations; proliferate rapidly | 考点提示: 课件(P7) [模块三：动作与主题辨析组]",
+    "example": "We have witnessed a proliferation of time-saving innovations that keep us busier than ever.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_125",
+    "word": "activist / advocate",
+    "phonetic": "/ˈæktɪvɪst/ / /ˈædvəkeɪt/",
+    "meaning": "[n./v.] 社会活动家 / 提倡，拥护者",
+    "detail": "核心搭配: social activist; advocate for change; advocate slower living | 考点提示: 课件(P12) [模块三：动作与主题辨析组]",
+    "example": "Even activists who advocate for simple living cannot deny the allure of technological speed.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_126",
+    "word": "swamp / swamped",
+    "phonetic": "/swɒmp/",
+    "meaning": "[n./adj.] 沼泽；应接不暇的，被繁重任务淹没的",
+    "detail": "核心搭配: be swamped with work/emails; stuck in a swamp | 考点提示: 课件(P15) [模块三：动作与主题辨析组]",
+    "example": "I'm completely swamped with coursework this semester and barely have time to breathe.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_127",
+    "word": "endurance / endure",
+    "phonetic": "/ɪnˈdjʊərəns/ / /ɪnˈdjʊə/",
+    "meaning": "[n./v.] 耐力，持久力 / 忍受，经受",
+    "detail": "核心搭配: physical endurance; endure hardship; test one's endurance | 考点提示: 课件(P17) [模块三：动作与主题辨析组]",
+    "example": "Running a marathon or finishing an exam-athon requires great mental and physical endurance.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_128",
+    "word": "chorus",
+    "phonetic": "/ˈkɔːrəs/",
+    "meaning": "[n.] 齐声赞同/批判；副歌，合唱队",
+    "detail": "核心搭配: a chorus of criticism/disapproval/praise; in chorus | 考点提示: 课件(P24) [模块三：动作与主题辨析组]",
+    "example": "There was a rising chorus of criticism from social critics against the idea that faster is always better.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_129",
+    "word": "organized",
+    "phonetic": "/ˈɔːɡənaɪzd/",
+    "meaning": "[adj.] 有条理的，安排周密的",
+    "detail": "核心搭配: an organized person; keep things organized; organized schedule | 考点提示: 课件(P25) [模块三：动作与主题辨析组]",
+    "example": "We have become more organized, yet less spontaneous and joyful in our daily experiences.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_130",
+    "word": "punctuated by",
+    "phonetic": "/ˈpʌŋktʃueɪtɪd baɪ/",
+    "meaning": "[phrase] 被…反复打断，被…频繁点缀",
+    "detail": "核心搭配: punctuated by phone alerts / bursts of laughter / delivery calls | 考点提示: 课件(P27, P29) [模块三：动作与主题辨析组]",
+    "example": "Humanity created an artificial time environment punctuated by mechanical contrivances and electronic impulses.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_131",
+    "word": "artificial time environment",
+    "phonetic": "/ˌɑːtɪˈfɪʃl taɪm ɪnˈvaɪrənmənt/",
+    "meaning": "[phrase] 人造时间环境（由钟表、日程等非自然节律主导的生活系统）",
+    "detail": "核心搭配: live in an artificial time environment; contrast with natural rhythms | 考点提示: 课件(P29) [模块三：动作与主题辨析组]",
+    "example": "Instead of living by sunrise and sunset, we dwell in an artificial time environment regulated by clocks.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_132",
+    "word": "banner",
+    "phonetic": "/ˈbænə(r)/",
+    "meaning": "[n.] 横幅，标语；旗号，原则",
+    "detail": "核心搭配: under the banner of progress / efficiency / science | 考点提示: 课件(P31) [模块三：动作与主题辨析组]",
+    "example": "Many questionable lifestyle changes have been promoted under the banner of modern efficiency.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_133",
+    "word": "approach (to life)",
+    "phonetic": "/əˈprəʊtʃ/",
+    "meaning": "[n.] 态度，生活方式，对待人生的视角",
+    "detail": "核心搭配: approach to life; a balanced approach; personal approach | 考点提示: 课件(P32) [模块三：动作与主题辨析组]",
+    "example": "Your approach to life is a personal preference: slow contemplation or fast-lane hustle.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_134",
+    "word": "bob up and down",
+    "phonetic": "/bɒb ʌp ænd daʊn/",
+    "meaning": "[phrase] 上下起伏，晃动着走动",
+    "detail": "核心搭配: bob up and down the aisle; talking heads bobbing | 考点提示: 课件(P19) [模块三：动作与主题辨析组]",
+    "example": "Two talking heads bobbing up and down the aisle showed two people together physically but disconnected mentally.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_135",
+    "word": "rat race",
+    "phonetic": "/ˈræt reɪs/",
+    "meaning": "[n.] 无休止的竞争，内卷名利场（侧重个人感到身心俱疲）",
+    "detail": "核心搭配: escape / get out of / leave the rat race; trapped in the rat race | 考点提示: 课件(P21) [模块四：时代热词与数字压力]",
+    "example": "Many young professionals dream of escaping the rat race and returning to a simpler rural lifestyle.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_136",
+    "word": "neijuan (内卷)",
+    "phonetic": "/neɪ dʒwæn/",
+    "meaning": "[n.] 内卷（侧重群体无实质收益的过度付出与竞争）",
+    "detail": "核心搭配: overlap with rat race; everyone works harder for little gain | 考点提示: 课件(P21) [模块四：时代热词与数字压力]",
+    "example": "Neijuan describes an environment where everyone puts in more effort, but no one gains much more.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_137",
+    "word": "hustle culture",
+    "phonetic": "/ˈhʌsl ˈkʌltʃə(r)/",
+    "meaning": "[n.] 拼命文化，打鸡血加班文化",
+    "detail": "核心搭配: Hustle culture makes rest feel lazy; glamorize overtime | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
+    "example": "Hustle culture praises the person who sleeps four hours a night and works nonstop.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_138",
+    "word": "grind culture",
+    "phonetic": "/ɡraɪnd ˈkʌltʃə(r)/",
+    "meaning": "[n.] 苦干文化，连轴转磨砺文化",
+    "detail": "核心搭配: Grind culture praises nonstop work; daily grind | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
+    "example": "Young workers are pushing back against grind culture in pursuit of better work-life balance.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_139",
+    "word": "an arms race",
+    "phonetic": "/ən ɑːmz reɪs/",
+    "meaning": "[n.] 军备竞赛（比喻各方不断加码的恶性攀比竞争）",
+    "detail": "核心搭配: academic arms race; tutoring has become an arms race | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
+    "example": "After-school tutoring has turned into an arms race among anxious parents.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_140",
+    "word": "a race to the bottom",
+    "phonetic": "/ə reɪs tu ðə ˈbɒtəm/",
+    "meaning": "[phrase] 逐底竞争（恶性降维竞争导致整体环境恶化）",
+    "detail": "核心搭配: lead to a race to the bottom; price war as a race to the bottom | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
+    "example": "Unregulated overtime and price dumping create a destructive race to the bottom.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_141",
+    "word": "competitive treadmill",
+    "phonetic": "/kəmˈpetətɪv ˈtredmɪl/",
+    "meaning": "[n.] 竞争跑步机（付出更多努力却在原地踏步）",
+    "detail": "核心搭配: stuck on a competitive treadmill; run on a treadmill | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
+    "example": "College applicants often feel trapped on a competitive treadmill where standards keep rising.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_142",
+    "word": "always-on culture",
+    "phonetic": "/ˈɔːlweɪz ɒn ˈkʌltʃə(r)/",
+    "meaning": "[n.] 全天候在线文化，时刻待命文化",
+    "detail": "核心搭配: an always-on workplace culture; expect 24/7 availability | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "The always-on culture blurred the boundary between professional obligations and personal time.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_143",
+    "word": "constantly reachable",
+    "phonetic": "/ˈkɒnstəntli ˈriːtʃəbl/",
+    "meaning": "[phrase] 随时随地联系得上，保持全天候可联系",
+    "detail": "核心搭配: be constantly reachable; pressure to be reachable | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "Smartphones have made employees constantly reachable, even during family dinners and weekends.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_144",
+    "word": "after-hours messages",
+    "phonetic": "/ˌɑːftə ˈaʊəz ˈmesɪdʒɪz/",
+    "meaning": "[n.] 非工作时间消息，下班后的工作讯息",
+    "detail": "核心搭配: receive after-hours messages; reply to after-hours emails | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "Receiving after-hours messages from supervisors is a major source of employee burnout.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_145",
+    "word": "instant response",
+    "phonetic": "/ˈɪnstənt rɪˈspɒns/",
+    "meaning": "[n.] 即时响应，秒回",
+    "detail": "核心搭配: expect an instant response; demand instant responses | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "Fast messaging creates an expectation of an instant response to every ping.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_146",
+    "word": "notification fatigue",
+    "phonetic": "/ˌnəʊtɪfɪˈkeɪʃn fəˈtiːɡ/",
+    "meaning": "[n.] 通知疲劳（弹窗和提示音过多引起的厌烦倦怠）",
+    "detail": "核心搭配: suffer from notification fatigue; silence notifications | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "Constant pop-ups from shopping and social media apps result in severe notification fatigue.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_147",
+    "word": "digital overload",
+    "phonetic": "/ˈdɪdʒɪtl ˌəʊvəˈləʊd/",
+    "meaning": "[n.] 数字化信息过载，数码超载",
+    "detail": "核心搭配: experience digital overload; combat digital overload | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "Students feeling digital overload are encouraged to take a weekly digital detox.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_148",
+    "word": "the right to disconnect",
+    "phonetic": "/ðə raɪt tu ˌdɪskəˈnekt/",
+    "meaning": "[n.] 离线权，断联权（下班后不回复工作消息的权利）",
+    "detail": "核心搭配: exercise the right to disconnect; enact right-to-disconnect laws | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "Several countries have passed laws granting workers the right to disconnect after office hours.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_149",
+    "word": "response-time expectations",
+    "phonetic": "/rɪˈspɒns taɪm ˌekspekˈteɪʃnz/",
+    "meaning": "[n.] 对回复时效的心理预期",
+    "detail": "核心搭配: escalating response-time expectations; manage client expectations | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "Unrealistic response-time expectations make people anxious when an email isn't answered in minutes.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_150",
+    "word": "countdown timer",
+    "phonetic": "/ˈkaʊntdaʊn ˈtaɪmə(r)/",
+    "meaning": "[n.] 倒计时器（制造紧迫感的倒计装置/界面）",
+    "detail": "核心搭配: a ticking countdown timer; countdown timers on shopping sites | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "E-commerce websites use countdown timers to induce panic buying before a sale ends.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_151",
+    "word": "read receipt",
+    "phonetic": "/ˈriːd rɪˌsiːt/",
+    "meaning": "[n.] 已读回执（显示消息是否已被阅读的状态标记）",
+    "detail": "核心搭配: turn off read receipts; seen status on messaging apps | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
+    "example": "The read receipt feature can cause social anxiety when a message shows 'Seen' with no reply.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_152",
+    "word": "set firm limits on",
+    "phonetic": "/set fɜːm ˈlɪmɪts ɒn/",
+    "meaning": "[phrase] 对…设定明确严格的界限",
+    "detail": "核心搭配: set firm limits on screen time; set limits on overtime | 考点提示: 课件(P33) [模块四：时代热词与数字压力]",
+    "example": "It is essential to set firm limits on work messages after 10 p.m. to guarantee restorative sleep.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_153",
+    "word": "scale back",
+    "phonetic": "/skeɪl bæk/",
+    "meaning": "[phr v.] 缩减，调减（规模、计划或开支）",
+    "detail": "核心搭配: scale back one's schedule; scale back weekend plans | 考点提示: 课件(P33) [模块四：时代热词与数字压力]",
+    "example": "To relieve mental exhaustion, we decided to scale back our ambitious weekend schedule.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_154",
+    "word": "clear a spot on the calendar",
+    "phonetic": "/klɪə ə spɒt ɒn ðə ˈkælɪndə(r)/",
+    "meaning": "[phrase] 在日程表上腾出/预留专门时间",
+    "detail": "核心搭配: clear a spot on your calendar for hobbies / exercise | 考点提示: 课件(P33) [模块四：时代热词与数字压力]",
+    "example": "Don't wait for free time to happen—clear a spot on your calendar for daily physical exercise.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_155",
+    "word": "squeeze in",
+    "phonetic": "/skwiːz ɪn/",
+    "meaning": "[phr v.] 挤出时间做，强塞进忙碌日程中",
+    "detail": "核心搭配: squeeze in a workout; squeeze in a ten-minute walk | 考点提示: 课件(P33) [模块四：时代热词与数字压力]",
+    "example": "My schedule was packed, but I managed to squeeze in a ten-minute walk between two meetings.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_156",
+    "word": "buy time",
+    "phonetic": "/baɪ taɪm/",
+    "meaning": "[idiom] 争取时间，拖延时间",
+    "detail": "核心搭配: buy time for negotiations; buy extra time | 考点提示: 课件(P34) [模块四：时代热词与数字压力]",
+    "example": "The defense attorney asked for a two-week postponement to buy time to interview new witnesses.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_157",
+    "word": "budget one's time",
+    "phonetic": "/ˈbʌdʒɪt wʌnz taɪm/",
+    "meaning": "[phrase] 规划分配时间（将时间如金钱般做预算）",
+    "detail": "核心搭配: budget your time wisely; time budget | 考点提示: 课件(P34) [模块四：时代热词与数字压力]",
+    "example": "Students who budget their time before exam week rarely find themselves cramming overnight.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_158",
+    "word": "run out of time",
+    "phonetic": "/rʌn aʊt əv taɪm/",
+    "meaning": "[phrase] 时间用尽，耗尽时间",
+    "detail": "核心搭配: run out of time on the exam; running out of time | 考点提示: 课件(P34) [模块四：时代热词与数字压力]",
+    "example": "I had to guess the last five questions because I ran out of time.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_159",
+    "word": "time-saving",
+    "phonetic": "/ˈtaɪm ˌseɪvɪŋ/",
+    "meaning": "[adj.] 节省时间的，提高效率的",
+    "detail": "核心搭配: time-saving device / innovation; time-saving technology | 考点提示: 课件(P7, P34) [模块四：时代热词与数字压力]",
+    "example": "Paradoxically, every time-saving device we adopt seems to make our lives feel more rushed.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_160",
+    "word": "grueling",
+    "phonetic": "/ˈɡruːəlɪŋ/",
+    "meaning": "[adj.] 极其繁重的，使人精疲力竭的",
+    "detail": "核心搭配: a grueling schedule; grueling training; grueling journey | 考点提示: 单元测试(Q33干扰项) [模块五：题集重要干扰与对比词]",
+    "example": "After a grueling day of meetings and lab work, she collapsed onto her bed.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_161",
+    "word": "undeniable",
+    "phonetic": "/ˌʌndɪˈnaɪəbl/",
+    "meaning": "[adj.] 无可否认的，确凿无疑的",
+    "detail": "核心搭配: undeniable fact; undeniable truth; undeniable talent | 考点提示: 单元测试(Q33干扰项) [模块五：题集重要干扰与对比词]",
+    "example": "It is an undeniable fact that digital devices have revolutionized modern communication.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_162",
+    "word": "pastime",
+    "phonetic": "/ˈpɑːstaɪm/",
+    "meaning": "[n.] 消遣，休闲娱乐活动",
+    "detail": "核心搭配: a pleasurable pastime; favorite pastime; outdoor pastime | 考点提示: 单元测试(Q22干扰项) / 教材原文 [模块五：题集重要干扰与对比词]",
+    "example": "Reading a physical book in a sunlit corner used to be his favorite weekend pastime.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_163",
+    "word": "meditation",
+    "phonetic": "/ˌmedɪˈteɪʃn/",
+    "meaning": "[n.] 冥想，沉思",
+    "detail": "核心搭配: deep meditation; practice meditation; silent meditation | 考点提示: 单元测试(Q8干扰项) [模块五：题集重要干扰与对比词]",
+    "example": "A few minutes of quiet meditation each morning can help calm an anxious mind.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_164",
+    "word": "aisle",
+    "phonetic": "/aɪl/",
+    "meaning": "[n.] 通道，过道（书店货架间、机舱、超市等走道）",
+    "detail": "核心搭配: walk down the aisle; bookstore aisle; aisle seat | 考点提示: 单元测试(Q22干扰项) / 课件(P19) [模块五：题集重要干扰与对比词]",
+    "example": "Two friends were scanning book titles while walking down the crowded bookstore aisle.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_165",
+    "word": "errand",
+    "phonetic": "/ˈerənd/",
+    "meaning": "[n.] 差事，跑腿日常事务",
+    "detail": "核心搭配: run errands; daily errands; on an errand | 考点提示: 单元测试(Q24干扰项) [模块五：题集重要干扰与对比词]",
+    "example": "He spent Saturday morning running errands: picking up dry cleaning and buying groceries.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_166",
+    "word": "comical",
+    "phonetic": "/ˈkɒmɪkl/",
+    "meaning": "[adj.] 滑稽好笑的，古怪可笑的",
+    "detail": "核心搭配: a comical sight; comical expression | 考点提示: 单元测试(Q25干扰项) [模块五：题集重要干扰与对比词]",
+    "example": "The cat looked comical trying to squeeze itself into a tiny cardboard shoebox.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_167",
+    "word": "liberal",
+    "phonetic": "/ˈlɪbərəl/",
+    "meaning": "[adj.] 宽泛的，自由的；意译的（与 literal 相对）",
+    "detail": "核心搭配: liberal translation (意译); liberal arts; liberal attitude | 考点提示: 单元测试(Q29对比考点) [模块五：题集重要干扰与对比词]",
+    "example": "A successful translator balances literal accuracy with a smooth, liberal rendering of idiom.",
+    "slashed": false
+  },
+  {
+    "id": "midterm_168",
+    "word": "deteriorate",
+    "phonetic": "/dɪˈtɪəriəreɪt/",
+    "meaning": "[v.] 变坏，恶化，退化",
+    "detail": "核心搭配: deteriorate rapidly; deteriorating quality of life; health deteriorates | 考点提示: 单元测试(Q12题干核心词) [模块五：题集重要干扰与对比词]",
+    "example": "In trying to cram so much into our lives, we are actually deteriorating the quality of those lives.",
+    "slashed": false
+  }
+];
+
+    let wordDeck = [];
+    let activeTab = 'pending';
+    let isMasked = true;
+
+    function initData() {
+      let saved = null;
+      try {
+        saved = localStorage.getItem(STORAGE_KEY);
+      } catch (e) {
+        console.warn('LocalStorage not available in current sandbox, using memory storage', e);
+      }
+
+      if (saved) {
+        try {
+          wordDeck = JSON.parse(saved);
+        } catch(e) {
+          wordDeck = [...INITIAL_DECK];
+        }
+      } else {
+        wordDeck = [...INITIAL_DECK];
+        persist();
+      }
+
+      // 如果本地只有少量旧测试词或为空，自动无缝升级为全量 168 半期考核心词库！
+      if (!wordDeck || wordDeck.length < 10) {
+        wordDeck = [...INITIAL_DECK];
+        persist();
+      }
+
+      render();
+    }
+
+    function persist() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(wordDeck));
+      } catch(e) {
+        console.warn('LocalStorage save failed (sandbox restricted):', e);
+      }
+      render();
+    }
+
+    // ==========================================
+    // 3. 界面渲染
+    // ==========================================
+    const cardsContainer = document.getElementById('cardsContainer');
+    const statPending = document.getElementById('statPending');
+    const statSlashed = document.getElementById('statSlashed');
+    const statTotal = document.getElementById('statTotal');
+    const statPercent = document.getElementById('statPercent');
+    const progressFill = document.getElementById('progressFill');
+    const tabCountPending = document.getElementById('tabCountPending');
+    const tabCountSlashed = document.getElementById('tabCountSlashed');
+    const maskToggle = document.getElementById('maskToggle');
+
+    function render() {
+      const total = wordDeck.length;
+      const slashedCount = wordDeck.filter(w => w.slashed).length;
+      const pendingCount = total - slashedCount;
+      const pct = total === 0 ? 0 : Math.round((slashedCount / total) * 100);
+
+      statPending.textContent = pendingCount;
+      statSlashed.textContent = slashedCount;
+      statTotal.textContent = total;
+      tabCountPending.textContent = pendingCount;
+      tabCountSlashed.textContent = slashedCount;
+      statPercent.textContent = pct + '%';
+      progressFill.style.width = pct + '%';
+
+      const list = wordDeck.filter(item => {
+        if (activeTab === 'pending') return !item.slashed;
+        if (activeTab === 'slashed') return item.slashed;
+        return true;
+      });
+
+      if (list.length === 0) {
+        let title = '暂无单词';
+        let desc = '词库空空如也，点击右上角“导入单词”开始吧！';
+        let icon = '📖';
+
+        if (activeTab === 'pending' && total > 0) {
+          title = '🎉 万词皆斩，大功告成！';
+          desc = '太强了！当前导入的生词已全部斩杀完毕，可以在“已斩杀”列表中复习。';
+          icon = '🏆';
+        } else if (activeTab === 'slashed') {
+          title = '暂无已斩记录';
+          desc = '在待斩列表中消灭生词，斩杀记录会沉淀到这里。';
+          icon = '🗡️';
+        }
+
+        cardsContainer.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">${icon}</div>
+            <div class="empty-title">${title}</div>
+            <div class="empty-desc">${desc}</div>
+            ${total === 0 ? `<button class="btn-sm btn-primary" onclick="openImport()">导入我的第一批单词</button>` : ''}
+          </div>
+        `;
+        return;
+      }
+
+      cardsContainer.innerHTML = list.map(item => `
+        <div class="word-card ${item.slashed ? 'is-slashed' : ''}" id="card-${item.id}">
+          <div class="slash-blade-line"></div>
+          <div class="word-content">
+            <div class="word-title-row">
+              <span class="word-name">${item.word}</span>
+              ${item.phonetic ? `<span class="word-phonetic">${item.phonetic}</span>` : ''}
+              <button class="pronounce-btn" onclick="pronounce('${item.word.replace(/'/g, "\\'")}')" title="朗读">🔊 读音</button>
+            </div>
+            <div class="meaning-wrap ${isMasked ? 'is-masked' : ''}" id="meaning-${item.id}" onclick="toggleMeaning('${item.id}')" title="点击切换 遮住 / 揭开 释义">
+              <span class="meaning-text">${item.meaning || '（暂无简单释义，点击详细查看）'}</span>
+              <span class="hide-hint">🙈 点此遮住</span>
+              <div class="mask-cover">🙈 点击揭开释义</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-detail" onclick="openDetail('${item.id}')">
+              📖 完整解释
+            </button>
+            ${
+              item.slashed
+                ? `<button class="btn-revive" onclick="reviveWord('${item.id}')">↩ 复活</button>`
+                : `<button class="btn-slash" onclick="slashWord('${item.id}')">🗡️ 斩！</button>`
+            }
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 斩掉单词
+    window.slashWord = function(id) {
+      playSlashSound();
+      const el = document.getElementById('card-' + id);
+      if (el) {
+        el.classList.add('slashing');
+        setTimeout(() => {
+          const target = wordDeck.find(w => w.id === id);
+          if (target) {
+            target.slashed = true;
+            persist();
+          }
+        }, 340);
+      } else {
+        const target = wordDeck.find(w => w.id === id);
+        if (target) {
+          target.slashed = true;
+          persist();
+        }
+      }
+    };
+
+    // 复活
+    window.reviveWord = function(id) {
+      const target = wordDeck.find(w => w.id === id);
+      if (target) {
+        target.slashed = false;
+        persist();
+      }
+    };
+
+    // 点击切换遮罩状态（遮住 / 揭开 随时反复切换）
+    window.toggleMeaning = function(id) {
+      const el = document.getElementById('meaning-' + id);
+      if (el) {
+        el.classList.toggle('is-masked');
+      }
+    };
+
+    // ==========================================
+    // 4. 完整解释
+    // ==========================================
+    const detailModal = document.getElementById('detailModal');
+    const detailModalBody = document.getElementById('detailModalBody');
+
+    window.openDetail = async function(id) {
+      const item = wordDeck.find(w => w.id === id);
+      if (!item) return;
+
+      detailModal.classList.add('open');
+      detailModalBody.innerHTML = `
+        <div style="text-align:center; padding: 32px 0;">
+          <div style="font-size: 24px; animation: spin 1s infinite linear;">⏳</div>
+          <div style="font-size: 13px; color: var(--text-sub); margin-top: 8px;">正在为 "${item.word}" 检索权威例句与深度释义...</div>
+        </div>
+      `;
+
+      try {
+        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(item.word)}`);
+        if (res.ok) {
+          const data = await res.json();
+          renderDictDetail(item, data[0]);
+        } else {
+          renderFallbackDetail(item);
+        }
+      } catch(err) {
+        renderFallbackDetail(item);
+      }
+    };
+
+    function renderDictDetail(item, dict) {
+      let meaningsHtml = '';
+      if (dict.meanings) {
+        meaningsHtml = dict.meanings.map(m => `
+          <div class="dict-pos-card">
+            <span class="dict-pos-tag">${m.partOfSpeech}</span>
+            ${m.definitions.slice(0, 2).map(d => `
+              <div class="dict-def-row">
+                <div class="dict-def-zh">${d.definition}</div>
+                ${d.example ? `<div class="dict-def-en">例: "${d.example}"</div>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        `).join('');
+      }
+
+      detailModalBody.innerHTML = `
+        <div class="dict-hero">
+          <span class="dict-word">${item.word}</span>
+          <span class="word-phonetic">${dict.phonetic || item.phonetic || ''}</span>
+          <button class="pronounce-btn" onclick="pronounce('${item.word.replace(/'/g, "\\'")}')">🔊 发音</button>
+        </div>
+
+        <div style="background:#f1f5f9; border-radius:12px; padding:12px 14px; margin-bottom:14px;">
+          <div style="font-size:12px; font-weight:700; color:var(--text-sub); margin-bottom:2px;">你的中文记忆含义：</div>
+          <div style="font-size:15px; font-weight:700; color:var(--text-main);">${item.meaning}</div>
+        </div>
+
+        ${item.detail ? `
+          <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:12px; padding:10px 14px; margin-bottom:14px; font-size:13px; color:#065f46;">
+            <strong>💡 词源背景/记忆技巧：</strong> ${item.detail}
+          </div>
+        ` : ''}
+
+        ${item.example ? `
+          <div style="margin-bottom:14px;">
+            <div style="font-size:12px; font-weight:700; color:var(--text-sub); margin-bottom:4px;">经典双语例句：</div>
+            <div style="font-size:14px; font-style:italic; color:#334155;">"${item.example}"</div>
+          </div>
+        ` : ''}
+
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--text-sub); margin-bottom:6px;">牛津/韦伯全英词义扩展：</div>
+          ${meaningsHtml}
+        </div>
+      `;
+    }
+
+    function renderFallbackDetail(item) {
+      detailModalBody.innerHTML = `
+        <div class="dict-hero">
+          <span class="dict-word">${item.word}</span>
+          <span class="word-phonetic">${item.phonetic || ''}</span>
+          <button class="pronounce-btn" onclick="pronounce('${item.word.replace(/'/g, "\\'")}')">🔊 发音</button>
+        </div>
+        <div style="background:#f1f5f9; border-radius:12px; padding:14px; margin-bottom:14px;">
+          <div style="font-size:12px; font-weight:700; color:var(--text-sub); margin-bottom:2px;">词义解析：</div>
+          <div style="font-size:16px; font-weight:700; color:var(--text-main);">${item.meaning || '暂无释义'}</div>
+        </div>
+        ${item.detail ? `<div style="font-size:13px; color:#047857; margin-bottom:10px;">${item.detail}</div>` : ''}
+        ${item.example ? `<div style="font-size:14px; font-style:italic; color:#334155;">例句: "${item.example}"</div>` : ''}
+      `;
+    }
+
+    // ==========================================
+    // 5. 导入功能
+    // ==========================================
+    const importModal = document.getElementById('importModal');
+    const importInput = document.getElementById('importInput');
+    const confirmImportBtn = document.getElementById('confirmImportBtn');
+    const autoFetchCheck = document.getElementById('autoFetchCheck');
+
+    window.openImport = function() {
+      importModal.classList.add('open');
+      importInput.focus();
+    };
+
+    document.getElementById('openImportBtn').addEventListener('click', openImport);
+
+    document.getElementById('quickSampleBtn').addEventListener('click', () => {
+      importInput.value = `altruism - 利他主义，无私品德
+pragmatic 讲求实际的，重实效的
+juxtapose 并列对照
+quintessential 最典型的，最具代表性的
+lucid 清晰易懂的；神志清醒的`;
+    });
+
+    confirmImportBtn.addEventListener('click', async () => {
+      const val = importInput.value.trim();
+      if (!val) {
+        showToast('请先输入或粘贴至少一个单词！', '⚠️');
+        return;
+      }
+
+      confirmImportBtn.disabled = true;
+      confirmImportBtn.textContent = '解析中...';
+
+      const lines = val.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      const newItems = [];
+      const autoFetch = autoFetchCheck.checked;
+
+      for (let line of lines) {
+        let word = '';
+        let phonetic = '';
+        let meaning = '';
+
+        const slashMatch = line.match(/^([a-zA-Z\s\-']+)\s+([\/\[].+?[\/\]])\s*(.*)$/);
+        if (slashMatch) {
+          word = slashMatch[1].trim();
+          phonetic = slashMatch[2].trim();
+          meaning = slashMatch[3].trim();
+        } else {
+          const parts = line.split(/[\t\-\,\—]+|\s{2,}/);
+          if (parts.length >= 2) {
+            word = parts[0].trim();
+            meaning = parts.slice(1).join(' ').trim();
+          } else {
+            const firstSpace = line.indexOf(' ');
+            if (firstSpace > 0 && /[\u4e00-\u9fa5]/.test(line)) {
+              word = line.substring(0, firstSpace).trim();
+              meaning = line.substring(firstSpace + 1).trim();
+            } else {
+              word = line.trim();
+            }
+          }
+        }
+
+        if (wordDeck.some(w => w.word.toLowerCase() === word.toLowerCase())) continue;
+
+        if (!meaning && autoFetch && /^[a-zA-Z\s\-']+$/.test(word)) {
+          try {
+            const apiRes = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+            if (apiRes.ok) {
+              const resData = await apiRes.json();
+              if (resData && resData[0]) {
+                phonetic = resData[0].phonetic || '';
+                const def0 = resData[0].meanings?.[0]?.definitions?.[0];
+                if (def0) {
+                  meaning = `[${resData[0].meanings[0].partOfSpeech || ''}] ${def0.definition}`;
+                }
+              }
+            }
+          } catch(e) {}
+        }
+
+        newItems.push({
+          id: 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+          word: word,
+          phonetic: phonetic,
+          meaning: meaning || '（待补充释义）',
+          detail: '',
+          example: '',
+          slashed: false
+        });
+      }
+
+      wordDeck = [...newItems, ...wordDeck];
+      persist();
+
+      confirmImportBtn.disabled = false;
+      confirmImportBtn.textContent = '确认导入';
+      importInput.value = '';
+      importModal.classList.remove('open');
+      showToast(`成功导入 ${newItems.length} 个新单词！`, '🎉');
+    });
+
+    // 预置真题词库
+    document.getElementById('loadMidtermBtn').addEventListener('click', () => {
+      wordDeck = [...INITIAL_DECK];
+      persist();
+      showToast('已载入《大学英语4》半期考全部 168 个核心词！', '🎉');
+    });
+
+    document.getElementById('openPresetsBtn').addEventListener('click', () => {
+      const presets = [
+        { word: 'procrastinate', phonetic: '/proʊˈkræs.tə.neɪt/', meaning: '拖延，耽搁' },
+        { word: 'meticulous', phonetic: '/məˈtɪk.jə.ləs/', meaning: '一丝不苟的，缜密的' },
+        { word: 'paradigm', phonetic: '/ˈpær.ə.daɪm/', meaning: '范式，典范，样板' },
+        { word: 'catalyst', phonetic: '/ˈkæt̬.əl.ɪst/', meaning: '催化剂；促成变化的人或事' }
+      ];
+
+      let added = 0;
+      presets.forEach(p => {
+        if (!wordDeck.some(w => w.word.toLowerCase() === p.word.toLowerCase())) {
+          wordDeck.unshift({ id: 'pre_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4), ...p, detail: '', example: '', slashed: false });
+          added++;
+        }
+      });
+
+      if (added > 0) {
+        persist();
+        showToast(`已为你追加 ${added} 个考点高频词！`, '⚡');
+      } else {
+        showToast('这些范例词已在词库中！', 'ℹ️');
+      }
+    });
+
+    // 备份导出
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      if (wordDeck.length === 0) return showToast('当前词库为空！', '⚠️');
+      const blob = new Blob([JSON.stringify(wordDeck, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `斩词客_词库备份_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // ==========================================
+    // 6. 交互监听与电脑键盘盲操
+    // ==========================================
+    document.querySelectorAll('.tab-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTab = btn.getAttribute('data-tab');
+        render();
+      });
+    });
+
+    maskToggle.addEventListener('change', (e) => {
+      isMasked = e.target.checked;
+      render();
+    });
+
+    document.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-close');
+        document.getElementById(id).classList.remove('open');
+      });
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-backdrop')) {
+        e.target.classList.remove('open');
+      }
+    });
+
+    // 键盘快捷盲操
+    window.addEventListener('keydown', (e) => {
+      if (importModal.classList.contains('open') || detailModal.classList.contains('open')) return;
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        maskToggle.checked = !maskToggle.checked;
+        isMasked = maskToggle.checked;
+        render();
+      } else if (e.code === 'Enter') {
+        e.preventDefault();
+        const firstPending = wordDeck.find(w => !w.slashed);
+        if (firstPending) slashWord(firstPending.id);
+      } else if (e.code === 'KeyS') {
+        const firstPending = wordDeck.find(w => !w.slashed);
+        if (firstPending) pronounce(firstPending.word);
+      }
+    });
+
+    initData();
+  </script>
+</body>
+</html>
