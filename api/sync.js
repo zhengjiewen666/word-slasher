@@ -46,8 +46,8 @@ module.exports = async (req, res) => {
         }
       }
 
-      if (!bodyData || !bodyData.deck) {
-        return res.status(400).json({ error: 'Missing deck in payload' });
+      if (!bodyData || (!bodyData.deck && !bodyData.modules)) {
+        return res.status(400).json({ error: 'Missing deck or modules in payload' });
       }
 
       bodyData.last_modified = Date.now();
