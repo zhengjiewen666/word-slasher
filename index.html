@@ -4619,7 +4619,7 @@
     // ==========================================
     // 4. 模块切换与文章过滤交互
     // ==========================================
-    window.switchModule = function(modId) {
+    function switchModule(modId) {
       if (!appData.modules[modId]) return;
       activeModuleId = modId;
       activeArticleFilter = 'all';
@@ -4629,9 +4629,10 @@
 
       const modName = modId === 'midterm' ? '半期考核心词' : '4篇精读拓展词';
       showToast(`已切换至「${modName}」模块`, modId === 'midterm' ? '📘' : '📰');
-    };
+    }
+    window.switchModule = switchModule;
 
-    window.filterByArticle = function(keyword) {
+    function filterByArticle(keyword) {
       activeArticleFilter = keyword;
       document.querySelectorAll('.art-pill-btn').forEach(btn => {
         if (btn.getAttribute('data-article') === keyword) {
@@ -4641,7 +4642,8 @@
         }
       });
       render();
-    };
+    }
+    window.filterByArticle = filterByArticle;
 
     function updateModuleUI() {
       const tabMidterm = document.getElementById('tabMidtermMod');
@@ -4779,7 +4781,7 @@
     }
 
     // 斩掉单词
-    window.slashWord = function(id) {
+    function slashWord(id) {
       playSlashSound();
       const currentDeck = getActiveDeck();
       const el = document.getElementById('card-' + id);
@@ -4803,10 +4805,11 @@
           triggerAutoCloudPush();
         }
       }
-    };
+    }
+    window.slashWord = slashWord;
 
     // 复活单词
-    window.reviveWord = function(id) {
+    function reviveWord(id) {
       const currentDeck = getActiveDeck();
       const target = currentDeck.find(w => w.id === id);
       if (target) {
@@ -4815,15 +4818,17 @@
         persist();
         triggerAutoCloudPush();
       }
-    };
+    }
+    window.reviveWord = reviveWord;
 
     // 点击切换遮罩状态
-    window.toggleMeaning = function(id) {
+    function toggleMeaning(id) {
       const el = document.getElementById('meaning-' + id);
       if (el) {
         el.classList.toggle('is-masked');
       }
-    };
+    }
+    window.toggleMeaning = toggleMeaning;
 
     // ==========================================
     // 6. 完整深度解释抽屉
@@ -4831,7 +4836,7 @@
     const detailModal = document.getElementById('detailModal');
     const detailModalBody = document.getElementById('detailModalBody');
 
-    window.openDetail = async function(id) {
+    async function openDetail(id) {
       const currentDeck = getActiveDeck();
       const item = currentDeck.find(w => w.id === id);
       if (!item) return;
@@ -4854,7 +4859,8 @@
       } else {
         renderFallbackDetail(item, false);
       }
-    };
+    }
+    window.openDetail = openDetail;
 
     function renderDictDetail(item, dict) {
       let meaningsHtml = '';
@@ -4950,10 +4956,11 @@
     const confirmImportBtn = document.getElementById('confirmImportBtn');
     const autoFetchCheck = document.getElementById('autoFetchCheck');
 
-    window.openImport = function() {
-      importModal.classList.add('open');
-      importInput.focus();
-    };
+    function openImport() {
+      if (importModal) importModal.classList.add('open');
+      if (importInput && importInput.focus) importInput.focus();
+    }
+    window.openImport = openImport;
 
     document.getElementById('openImportBtn').addEventListener('click', openImport);
 
