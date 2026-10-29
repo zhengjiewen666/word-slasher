@@ -6,7 +6,8 @@
     "meaning": "[v.] 招收，吸收；登记，注册（入校/加入课程等）",
     "detail": "核心搭配: enroll in (a course / school); enroll sb. in / on sth.; enrollment rate | 考点提示: 单元测试Q15、Q35核心考点，常考搭配 enroll in",
     "example": "More college graduates choose to enroll in short-term training courses to improve their practical work skills.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "越来越多的大学毕业生选择参加短期培训课程，以提高实际工作技能。"
   },
   {
     "id": "midterm_2",
@@ -15,7 +16,8 @@
     "meaning": "[n. / v.] n. 目标，目的，宗旨；物体；v. 反对，抗议",
     "detail": "核心搭配: object to doing sth.; a physical object; object of study; raise an objection | 考点提示: 作动词时后接介词 to + 名词/动名词",
     "example": "No one objected to the proposal when it was presented at the meeting.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "在会议上提出该提案时，没有人表示反对。"
   },
   {
     "id": "midterm_3",
@@ -24,7 +26,8 @@
     "meaning": "[n. / adj.] n. 目标，目的；adj. 客观的，实事求是的",
     "detail": "核心搭配: achieve one's objective; an objective assessment / view; remain objective | 考点提示: 区分 subjective (主观的)",
     "example": "Scientists must maintain an objective attitude when observing natural specimens.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "科学家在观察自然标本时必须保持客观的态度。"
   },
   {
     "id": "midterm_4",
@@ -33,7 +36,8 @@
     "meaning": "[n.] 反对，异议，反对的理由",
     "detail": "核心搭配: have / raise an objection to sth.; without objection | 考点提示: 搭配 have an objection to sth.",
     "example": "The committee voiced strong objections to the proposed construction plan.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "委员会对拟议的施工方案提出了强烈反对。"
   },
   {
     "id": "midterm_5",
@@ -42,7 +46,8 @@
     "meaning": "[n. / adj.] n. 前事，先例，祖先，来历；adj. 先行的，先前的",
     "detail": "核心搭配: historical antecedents; antecedent events; antecedent to sth. | 考点提示: 词根 cede (走) + ante (前) -> 先前发生的事物",
     "example": "We cannot fully understand the present situation without knowing its historical antecedents.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": "如果不了解其历史前情，我们就无法充分理解当前的局势。"
   },
   {
     "id": "midterm_6",
@@ -51,7 +56,8 @@
     "meaning": "[v.] 在...之前发生，先于，走在...前面",
     "detail": "核心搭配: precede sb. / sth.; be preceded by; preceding chapter | 考点提示: 形近词辨析核心：precede (先于), proceed (推进), recede (后退)",
     "example": "A brief introduction will precede the guest lecture.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": "特邀讲座之前会有一段简短的介绍。"
   },
   {
     "id": "midterm_7",
@@ -60,7 +66,8 @@
     "meaning": "[v.] 继续进行，推进，前进；行进",
     "detail": "核心搭配: proceed with sth.; proceed to do sth.; proceed from | 考点提示: 常用搭配 proceed with 继续进行",
     "example": "After a short break, the professor proceeded with his detailed explanation.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "短暂休息后，教授继续进行详细的讲解。"
   },
   {
     "id": "midterm_8",
@@ -69,7 +76,8 @@
     "meaning": "[v.] 后退，退去，渐弱（如潮水退去、记忆减退）",
     "detail": "核心搭配: recede into the distance; recede from view; floodwaters recede | 考点提示: 侧重在空间或时间上向后退缩或逐渐模糊",
     "example": "As the years passed, painful childhood memories began to recede into the background.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "随着岁月流逝，童年的痛苦记忆开始渐渐淡出脑海。"
   },
   {
     "id": "midterm_9",
@@ -78,7 +86,8 @@
     "meaning": "[v.] 超过，超出，超越（限度、预算、预期）",
     "detail": "核心搭配: exceed expectations; exceed the speed limit; exceed one's authority | 考点提示: 派生词：exceedingly (adv. 极其，非常)",
     "example": "The final sales volume significantly exceeded the company's annual target.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "最终的销售额大幅超出了公司的年度目标。"
   },
   {
     "id": "midterm_10",
@@ -87,7 +96,8 @@
     "meaning": "[v.] 脱离，退出（国家、政党、联盟）",
     "detail": "核心搭配: secede from (a nation / federation); right to secede | 考点提示: 前缀 se- (分开) + cede (走)",
     "example": "Several southern states voted to secede from the Union prior to the Civil War.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": "在内战爆发之前，南部几个州投票决定脱离联邦独立。"
   },
   {
     "id": "midterm_11",
@@ -96,7 +106,8 @@
     "meaning": "[n.] 标本，样本，抽样",
     "detail": "核心搭配: a biological specimen; collect / examine specimens; specimen bottle | 考点提示: Unit 1课文核心核心实物：解剖台上的鱼标本",
     "example": "Professor Agassiz placed a fish specimen in front of the young student for observation.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "阿加西斯教授把一条鱼标本放在年轻学生面前让他观察。"
   },
   {
     "id": "midterm_12",
@@ -105,7 +116,8 @@
     "meaning": "[adj.] 明确的，清楚明白的，直截了当的",
     "detail": "核心搭配: explicit instructions; make sth. explicit; explicit rules; explicitly state | 考点提示: 单元测试Q11核心考点，汉译英重点词；反义词 implicit",
     "example": "She did not give explicit answers to every question, but encouraged students to think critically.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "她没有对每个问题给出明确直白的答案，而是鼓励学生批判性思考。"
   },
   {
     "id": "midterm_13",
@@ -114,7 +126,8 @@
     "meaning": "[adj.] 含蓄的，暗示的，内含的；无保留的",
     "detail": "核心搭配: implicit assumption; implicit agreement; implicit trust in sb. | 考点提示: 反义词：explicit",
     "example": "There was an implicit understanding between the two researchers that they would share the credit.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "两位研究人员之间有一种心照不宣的默契，那就是共享这项学术成果。"
   },
   {
     "id": "midterm_14",
@@ -123,7 +136,8 @@
     "meaning": "[v.] 委托，托付，把…托付给",
     "detail": "核心搭配: entrust sb. with sth.; entrust sth. to sb. | 考点提示: 单元测试Q22考点，必背双重搭配：entrust sb. with sth. / entrust sth. to sb.",
     "example": "The manager decided to entrust the crucial task to a reliable colleague with rich practical experience.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "经理决定将这项关键任务托付给一位具有丰富实战经验的可靠同事。"
   },
   {
     "id": "midterm_15",
@@ -132,7 +146,8 @@
     "meaning": "[v.] 弄湿，使湿润，微湿",
     "detail": "核心搭配: moisten one's lips; moisten with water / alcohol | 考点提示: 后缀 -en 表致使；注意 t 不发音",
     "example": "He had to constantly moisten the fish specimen with alcohol to keep it from drying out.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "他必须不断用酒精浸润鱼标本，以防其脱水变干。"
   },
   {
     "id": "midterm_16",
@@ -141,7 +156,8 @@
     "meaning": "[adj.] 微湿的，湿润的，潮湿的",
     "detail": "核心搭配: moist eyes; moist air; keep the surface moist | 考点提示: 微湿偏舒服，区别 damp (阴湿不适)",
     "example": "The soil in the greenhouse was kept moist and fertile for seed germination.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "温室里的土壤保持湿润肥沃，以促进种子发芽。"
   },
   {
     "id": "midterm_17",
@@ -150,7 +166,8 @@
     "meaning": "[n.] 水分，湿度，潮气",
     "detail": "核心搭配: moisture content; absorb / retain moisture; moisture cream | 考点提示: 派生词：moisturize (v. 保湿)",
     "example": "Plants lose moisture through their leaves during hot summer afternoons.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "在炎热夏日的午后，植物会通过叶片散失水分。"
   },
   {
     "id": "midterm_18",
@@ -159,7 +176,8 @@
     "meaning": "[n.] （瓶子等的）塞子；阻止物，妨碍物",
     "detail": "核心搭配: pull out / replace the stopper; conversation stopper (冷场话) | 考点提示: 课文与题集高频词：conversation stopper 终结谈话的冷场话",
     "example": "He pulled the glass stopper from the jar containing the preservative fluid.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "他拔掉装有防腐液的广口瓶玻璃塞。"
   },
   {
     "id": "midterm_19",
@@ -168,7 +186,8 @@
     "meaning": "[v. / n.] v. 投身于，钻研；骤降，暴跌；跳入；n. 暴跌，跳水",
     "detail": "核心搭配: plunge into (work / study / water); take the plunge (毅然决然尝试); plunge dramatically | 考点提示: 单元测试Q26核心考点，重点考查 plunge into 投身于",
     "example": "After receiving the assignment, she plunged into her academic research without hesitation.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": "接到任务后，她毫不犹豫地一头扎进了学术研究中。"
   },
   {
     "id": "midterm_20",
@@ -177,7 +196,8 @@
     "meaning": "[adj.] 传染性的；（情绪、笑声等）有感染力的",
     "detail": "核心搭配: infectious disease; infectious laughter / enthusiasm; highly infectious | 考点提示: 单元测试Q3核心考点；近义：contagious (接触传染的)",
     "example": "His infectious enthusiasm inspired everyone on the project team to work harder.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": "他极具感染力的热情激励了项目团队中的每一个人更加努力工作。"
   },
   {
     "id": "midterm_21",
@@ -186,7 +206,8 @@
     "meaning": "[v. / n.] 凝视，注视（长时间、平静、专注或赞叹地看）",
     "detail": "核心搭配: gaze at / into; fix one's gaze upon; steadfast gaze | 考点提示: 四大看辨析之一：gaze(深情/专注凝视) vs stare(吃惊/失礼盯视) vs glance(扫视) vs glimpse(瞥见)",
     "example": "The scientist gazed at the tiny details of the fish specimen for hours.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_22",
@@ -195,7 +216,8 @@
     "meaning": "[v. / n.] 盯，凝视（多因惊讶、震惊或显得粗鲁）",
     "detail": "核心搭配: stare at; stare blankly; stare in disbelief | 考点提示: 常含粗鲁或震惊情绪",
     "example": "It is considered impolite to stare at strangers on the street.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_23",
@@ -204,7 +226,8 @@
     "meaning": "[v. / n.] 匆匆一瞥，扫视，粗略看",
     "detail": "核心搭配: at first glance (乍一看); glance at one's watch; take a glance | 考点提示: 高频短语 at first glance",
     "example": "At first glance the problem seemed straightforward, but deeper analysis revealed its complexity.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_24",
@@ -213,7 +236,8 @@
     "meaning": "[n. / v.] 一瞥，短暂瞥见（常指事物瞬间出现而未看清）",
     "detail": "核心搭配: catch / get a glimpse of; a fleeting glimpse | 考点提示: 搭配 catch a glimpse of 瞥见",
     "example": "Fans waited outside for hours just to catch a brief glimpse of the film director.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_25",
@@ -222,7 +246,8 @@
     "meaning": "[v. / n.] v. （鬼魂）出没；（记忆、恐惧等）萦绕心头；n. 常去之处",
     "detail": "核心搭配: haunt sb.'s memories; be haunted by; a favorite haunt | 考点提示: 题集高频词，多用于抽象记忆萦绕",
     "example": "The tragic scene haunted his memory for decades after the event.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_26",
@@ -231,7 +256,8 @@
     "meaning": "[adj.] 令人难忘的，萦绕心头的，久久不散的（常指旋律、诗句、回忆）",
     "detail": "核心搭配: a haunting melody / tune; haunting beauty; haunting memories | 考点提示: 常修饰 melody, music, beauty",
     "example": "The film concluded with a haunting melody that brought tears to the audience's eyes.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_27",
@@ -240,7 +266,8 @@
     "meaning": "[adj.] 闹鬼的；忧心忡忡的，受困扰的",
     "detail": "核心搭配: a haunted house; have a haunted look on one's face | 考点提示: 形容人面带忧虑或惊恐",
     "example": "The soldier returned from the battlefield with a haunted expression in his eyes.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_28",
@@ -249,7 +276,8 @@
     "meaning": "[v.] 赞扬，表扬；推荐；得到赞同",
     "detail": "核心搭配: commend sb. for sth.; commend itself to sb. (为某人所青睐); highly commended | 考点提示: 单元测试Q12核心考点；搭配 commend sb. for sth.",
     "example": "The professor commended the students who had devoted themselves wholeheartedly to scientific inquiry.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_29",
@@ -258,7 +286,8 @@
     "meaning": "[adj.] 坚定的，不动摇的，始终如一的",
     "detail": "核心搭配: steadfast faith / loyalty; steadfast gaze (凝神专注的目光); remain steadfast | 考点提示: 近义词：firm, resolute, unswerving",
     "example": "Despite severe hardships, she remained steadfast in her commitment to medical ethics.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_30",
@@ -267,7 +296,8 @@
     "meaning": "[adj.] 不情愿的，勉强的 (与 reluctant 同义)",
     "detail": "核心搭配: be loath to do sth. | 考点提示: 注意为形容词，不能带宾语，常作表语 be loath to do sth.",
     "example": "He was loath to admit that his initial hypothesis had been completely wrong.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_31",
@@ -276,7 +306,8 @@
     "meaning": "[v.] 极度厌恶，憎恨 (与 detest, despise 同义)",
     "detail": "核心搭配: loathe doing sth.; loathe sb. / sth. | 考点提示: 注意发音带浊辅音 /ð/，为及物动词",
     "example": "They loathe cruelty in any form and advocate for animal welfare.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_32",
@@ -285,7 +316,8 @@
     "meaning": "[adj.] 令人作呕的，可憎的，极讨厌的",
     "detail": "核心搭配: a loathsome creature; loathsome behavior / smell | 考点提示: 反义：delightful, pleasant",
     "example": "The tyrant was remembered throughout history for his loathsome crimes.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_33",
@@ -294,7 +326,8 @@
     "meaning": "[v.] 禁止，不许（最通用口语与正式词）",
     "detail": "核心搭配: forbid sb. to do sth.; forbid doing sth.; God forbid! | 考点提示: 常考结构 forbid sb. to do / forbid sb. from doing",
     "example": "School regulations strictly forbid students from using mobile phones during exams.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_34",
@@ -303,7 +336,8 @@
     "meaning": "[v.] （通过法律、法规、官方条令）禁止，阻止",
     "detail": "核心搭配: prohibit sb. from doing sth.; strictly prohibited; law prohibits | 考点提示: 侧重官方法律法规约束，搭配 prohibit sb. from doing",
     "example": "Municipal laws prohibit smoking in all indoor public spaces and public transport.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_35",
@@ -312,7 +346,8 @@
     "meaning": "[v. / n.] （官方或社会舆论）明令取缔，全面查禁；禁令",
     "detail": "核心搭配: impose / lift a ban on sth.; ban sb. from doing sth. | 考点提示: 强调社会舆论与官方全面禁止",
     "example": "The government decided to impose a total ban on single-use plastics.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_36",
@@ -321,7 +356,8 @@
     "meaning": "[v. / n.] v. 阻挡，阻止；封锁；n. 酒吧；门闩；障碍",
     "detail": "核心搭配: bar sb. from doing sth.; barred windows; behind bars (在狱中) | 考点提示: 搭配 bar sb. from doing sth.",
     "example": "Protesters barred the entrance to the office building, preventing staff from entering.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_37",
@@ -330,7 +366,8 @@
     "meaning": "[v. / n.] （法律/官方/军事）正式禁止，封锁，阻断",
     "detail": "核心搭配: interdict the drug trade; judicial interdict; interdict supply routes | 考点提示: 极正式书面语及法律/军事术语",
     "example": "Naval forces were dispatched to interdict shipments of contraband across the sea.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_38",
@@ -339,7 +376,8 @@
     "meaning": "[adj.] 显眼的，显著的，引人注目的（易于看见或引起注意）",
     "detail": "核心搭配: conspicuous consumption (炫耀性消费); be conspicuous by one's absence; highly conspicuous | 考点提示: 近义词：noticeable, eye-catching",
     "example": "The bright red sign was placed in a conspicuous position near the main gate.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_39",
@@ -348,7 +386,8 @@
     "meaning": "[adj.] 看得见的，可见的；明显的",
     "detail": "核心搭配: visible to the naked eye; highly visible; visible progress | 考点提示: 单元测试Q7核心考点；反义词 invisible",
     "example": "The microscopic organisms are not visible to the naked human eye.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_40",
@@ -357,7 +396,8 @@
     "meaning": "[adv.] 明显地，显而易见地",
     "detail": "核心搭配: visibly shaken / upset; visibly relieved | 考点提示: 常修饰情感状态形容词",
     "example": "She was visibly shaken after hearing the alarming news from home.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_41",
@@ -366,7 +406,8 @@
     "meaning": "[adj.] 看不见的，无形的",
     "detail": "核心搭配: invisible hand (看不见的手); invisible bacteria; invisible rays | 考点提示: 常用于隐喻或科学语境",
     "example": "Ultraviolet rays are completely invisible to the human eye but can damage skin.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_42",
@@ -375,7 +416,8 @@
     "meaning": "[adv.] 看不见地，暗中，无形地",
     "detail": "核心搭配: operate invisibly; invisibly connected | 考点提示: 副词形式",
     "example": "The underlying algorithms work invisibly in the background to filter online content.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_43",
@@ -384,7 +426,8 @@
     "meaning": "[adj.] 明显的，显而易见的（一目了然毋庸置疑）",
     "detail": "核心搭配: an obvious fact / mistake; for obvious reasons; it is obvious that... | 考点提示: 最通用的'明显'词汇",
     "example": "It was obvious from her enthusiastic tone that she loved her academic major.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_44",
@@ -393,7 +436,8 @@
     "meaning": "[adj.] 显而易见的；表面上的，貌似的",
     "detail": "核心搭配: it became apparent that; apparent contradiction; for no apparent reason | 考点提示: 双重含义：显而易见 vs 表面貌似（apparent vs real）",
     "example": "It soon became apparent that the initial calculations contained significant errors.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_45",
@@ -402,7 +446,8 @@
     "meaning": "[adj.] 突出的，显著的；著名的，杰出的",
     "detail": "核心搭配: play a prominent role; a prominent scholar / feature; prominently displayed | 考点提示: 既指物理上突出，也指社会地位杰出",
     "example": "He has played a prominent role in promoting international educational exchanges.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_46",
@@ -411,7 +456,8 @@
     "meaning": "[adj.] 引人注目的，异乎寻常的，深刻醒目的",
     "detail": "核心搭配: a striking resemblance (惊人相似); a striking difference; striking features | 考点提示: 经典搭配：striking resemblance / contrast",
     "example": "There is a striking resemblance between the two historical events.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_47",
@@ -420,7 +466,8 @@
     "meaning": "[adj.] 极不幸的，悲惨的，难受的；恶劣的，糟糕的",
     "detail": "核心搭配: feel wretched; live in wretched poverty; wretched conditions | 考点提示: 单元测试Q8考点，汉译英重点词汇",
     "example": "Occasionally we would feel wretched because we had to spend hours reading the difficult text.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_48",
@@ -429,7 +476,8 @@
     "meaning": "[adv.] 悲惨地，可怜地，极其",
     "detail": "核心搭配: wretchedly poor; feel wretchedly ill | 考点提示: 副词形式",
     "example": "They lived wretchedly in makeshift tents during the harsh winter months.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_49",
@@ -438,7 +486,8 @@
     "meaning": "[v.] 向…保证，使确信（侧重打消某人顾虑）",
     "detail": "核心搭配: assure sb. of sth.; assure sb. that...; rest assured (请放心) | 考点提示: 宾语必须接人：assure sb. that / assure sb. of sth.",
     "example": "The doctor assured the anxious parents that the surgery had been completely successful.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_50",
@@ -447,7 +496,8 @@
     "meaning": "[v.] 确保，保证（确保事情实现或发生）",
     "detail": "核心搭配: ensure that...; ensure success / safety; take steps to ensure | 考点提示: 宾语接事物或从句：ensure that / ensure sth.（不接人）",
     "example": "We must take immediate measures to ensure that academic regulations are strictly followed.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_51",
@@ -456,7 +506,8 @@
     "meaning": "[v.] 使安心，使消除疑虑（使恢复信心和平静）",
     "detail": "核心搭配: reassure sb. about sth.; reassure sb. that...; smile reassuringly | 考点提示: 单元测试Q20核心考点，重点指'使消退忧虑'",
     "example": "The tutor tried to reassure the nervous freshman that everyone makes mistakes at the start.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_52",
@@ -465,7 +516,8 @@
     "meaning": "[adj.] 令人安心的，宽慰的",
     "detail": "核心搭配: a reassuring smile / voice / message; reassuring news | 考点提示: 修饰事物或举止",
     "example": "Hearing her mother's calm voice on the telephone was extremely reassuring.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_53",
@@ -474,7 +526,8 @@
     "meaning": "[adj.] 对称的，匀称的",
     "detail": "核心搭配: symmetrical organs; bilateral symmetry; perfectly symmetrical | 考点提示: 课文核心生物学考点：课文中提及的'对称器官'",
     "example": "Professor Agassiz pointed out that the fish possessed symmetrical organs on both sides.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_54",
@@ -483,7 +536,8 @@
     "meaning": "[n. / v.] n. 目录，全套清单；v. 编入目录，系统列出",
     "detail": "核心搭配: library catalogue; mail-order catalogue; catalogue all known species | 考点提示: 也可拼写为 catalog",
     "example": "Biologists spent several decades cataloguing all local marine species.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_55",
@@ -492,7 +546,8 @@
     "meaning": "[adj.] 无法估量的，极其宝贵的（价值巨大到无法计算）",
     "detail": "核心搭配: inestimable value / worth; of inestimable benefit to | 考点提示: 四大价值词辨析之一：inestimable (无法估量的) vs invaluable (极其宝贵的) vs priceless (无价的) vs worthless (毫无价值的)",
     "example": "The ancient manuscripts are of inestimable historical and cultural value.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_56",
@@ -501,7 +556,8 @@
     "meaning": "[adj.] 极宝贵的，极其有用的（切勿误判为'不值钱'）",
     "detail": "核心搭配: invaluable advice / assistance; prove invaluable to | 考点提示: 易错警示：invaluable 意为'极宝贵的'，而不是 worthless",
     "example": "Her practical experience in fieldwork proved invaluable during the archaeological project.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_57",
@@ -510,7 +566,8 @@
     "meaning": "[adj.] 无价的，极其珍贵的；滑稽可笑的",
     "detail": "核心搭配: priceless art treasures; priceless moments / advice | 考点提示: 近义词：invaluable, beyond price",
     "example": "The museum houses a priceless collection of Renaissance oil paintings.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_58",
@@ -519,7 +576,8 @@
     "meaning": "[adj.] 无价值的，毫无用处的，一文不值的",
     "detail": "核心搭配: worthless paper / promise; totally worthless | 考点提示: 反义词：priceless, invaluable",
     "example": "Without accurate data, all these theoretical models are completely worthless.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_59",
@@ -528,7 +586,8 @@
     "meaning": "[n.] 遗产，遗赠；历史留给后世的产物/精神财富",
     "detail": "核心搭配: cultural / historical legacy; leave a lasting legacy; legacy of colonialism | 考点提示: 课文课后核心主题词",
     "example": "Agassiz's scientific legacy continues to inspire generations of modern zoologists.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_60",
@@ -537,7 +596,8 @@
     "meaning": "[v.] 像，与…相似（不用于被动语态或进行时）",
     "detail": "核心搭配: closely / strongly resemble sb.; resemble each other | 考点提示: 语法警示：resemble 不用于被动语态，也不与 with 连用",
     "example": "The newborn dolphin closely resembled its mother in color and form.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_61",
@@ -546,7 +606,8 @@
     "meaning": "[n.] 相似，形似，相似之处",
     "detail": "核心搭配: bear a strong resemblance to; striking resemblance; little resemblance | 考点提示: 核心搭配：bear a resemblance to 与…有相似之处",
     "example": "There is a striking resemblance between the architecture of the two ancient cities.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_62",
@@ -555,7 +616,8 @@
     "meaning": "[v.] 不同，相异，有区别；产生分歧",
     "detail": "核心搭配: differ from sb./sth.; differ in (size / opinion); beg to differ | 考点提示: 搭配 differ from (区别于) / differ in (在…方面不同)",
     "example": "The two subspecies differ significantly in the structure of their tail fins.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_63",
@@ -564,7 +626,8 @@
     "meaning": "[n.] 区别，差别；优秀，杰出；特点",
     "detail": "核心搭配: make / draw a distinction between; a person of distinction; with distinction | 考点提示: 搭配 draw a distinction between",
     "example": "Philosophers often draw a clear distinction between moral facts and subjective opinions.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_64",
@@ -573,7 +636,8 @@
     "meaning": "[n.] 解剖，生物解剖；仔细剖析",
     "detail": "核心搭配: dissection table (解剖台); perform a dissection; rigorous dissection of the text | 考点提示: 课文高频场景词：解剖与显微镜观察",
     "example": "The biology laboratory had several fish specimens lined up on the dissection table.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_65",
@@ -582,7 +646,8 @@
     "meaning": "[v.] 解剖；仔细剖析，仔细审查",
     "detail": "核心搭配: dissect an animal / frog; dissect a poem / argument | 考点提示: 引申为文学或逻辑上的深度剖析",
     "example": "Students were asked to dissect the poem line by line to understand its metaphorical structure.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_66",
@@ -591,7 +656,8 @@
     "meaning": "[n.] 厌恶，反感，极度讨厌",
     "detail": "核心搭配: have / hold an aversion to; a deep-rooted aversion; risk aversion | 考点提示: 单元测试Q23、Q32核心考点，必背搭配 hold an aversion to",
     "example": "Many people hold a strong aversion to online gossip because it often spreads false rumors.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_67",
@@ -600,7 +666,8 @@
     "meaning": "[n. / v.] n. 企图，努力；投标，出价；v. 出价；命令，致意",
     "detail": "核心搭配: submit a bid for; make a bid for power; in a bid to do sth.; bid farewell to | 考点提示: 单元测试Q13核心考点，必背搭配 submit a bid for",
     "example": "Several construction companies submitted a bid for the municipal renewal project.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_68",
@@ -609,7 +676,8 @@
     "meaning": "[n.] 不情愿，勉强",
     "detail": "核心搭配: show reluctance to do sth.; overcome one's reluctance; with reluctance | 考点提示: 单元测试Q14核心考点",
     "example": "He accepted the promotion with obvious reluctance, knowing the heavy stress involved.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_69",
@@ -618,7 +686,8 @@
     "meaning": "[adj.] 不情愿的，勉强的",
     "detail": "核心搭配: be reluctant to do sth.; reluctant consent | 考点提示: 搭配 be reluctant to do sth.",
     "example": "Many employees were reluctant to adopt the new digital tracking system.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_70",
@@ -627,7 +696,8 @@
     "meaning": "[n. / v.] n. 特征，特色；容貌；v. 以…为特色，重点介绍",
     "detail": "核心搭配: special / key feature; feature story; prominently feature sb. | 考点提示: 单元测试Q6核心考点",
     "example": "The spacious green gardens are a special feature of this historical university campus.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_71",
@@ -636,7 +706,8 @@
     "meaning": "[adj.] 精力充沛的，充满活力的，积极的",
     "detail": "核心搭配: energetic youth / team; take energetic measures; remain energetic | 考点提示: 单元测试Q9核心考点；修饰人或行动",
     "example": "The energetic youth volunteer team has devoted plenty of time to community services.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_72",
@@ -645,7 +716,8 @@
     "meaning": "[v.] 徘徊，逗留；（气味、记忆、病痛等）久久不散",
     "detail": "核心搭配: linger on / over; linger in the mind; a lingering doubt / smile | 考点提示: 单元测试Q24核心考点，常指气味、旋律或记忆久久留存",
     "example": "The fragrant aroma of fresh coffee lingered in the kitchen for hours.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_73",
@@ -654,7 +726,8 @@
     "meaning": "[v.] 把…联系起来；叙述，讲述；产生共鸣，理解",
     "detail": "核心搭配: relate A to B; relate to sb./sth.; closely related | 考点提示: 单元测试Q10核心考点，必背搭配 relate...to...",
     "example": "The professor encouraged students to relate scientific theories to everyday observations.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_74",
@@ -663,7 +736,8 @@
     "meaning": "[adj.] 无限的，无穷的，极大的",
     "detail": "核心搭配: infinite variety; infinite patience; infinite wisdom; infinite possibilities | 考点提示: 单元测试Q1核心考点，经典搭配 infinite variety",
     "example": "The most amazing thing about natural ecosystems is their infinite variety.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_75",
@@ -672,7 +746,8 @@
     "meaning": "[adv.] 无限地，极其，远远地",
     "detail": "核心搭配: infinitely better; infinitely superior; infinitely complex | 考点提示: 常修饰比较级表示'…得多'",
     "example": "Real-world engineering challenges are infinitely more complex than textbook examples.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_76",
@@ -681,7 +756,8 @@
     "meaning": "[v.] 询问，打听；调查，探究",
     "detail": "核心搭配: inquire as to / about sth.; inquire into the nature of things; inquire after sb. | 考点提示: 单元测试Q4核心考点，汉译英重点句必备：inquire into 探究事物本质",
     "example": "In the course of seeking answers, we learned to inquire into the nature of things.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_77",
@@ -690,7 +766,8 @@
     "meaning": "[adj.] 内部的；国内的；体内的；内在的",
     "detail": "核心搭配: internal organs; internal market / affairs; internal structure | 考点提示: 单元测试Q17考点；反义词 external",
     "example": "Biologists carefully examined both the external appearance and internal organs of the specimen.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_78",
@@ -699,7 +776,8 @@
     "meaning": "[adj.] 外部的，外表的，外来的",
     "detail": "核心搭配: external factors; external pressure; external appearance | 考点提示: 反义词 internal",
     "example": "Students should not judge a specimen merely by its external features.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_79",
@@ -708,7 +786,8 @@
     "meaning": "[n.] 痛苦，苦难；悲惨的境遇；穷困",
     "detail": "核心搭配: live in misery; plunge into misery; cause sb. great misery | 考点提示: 单元测试Q21、Q34核心考点",
     "example": "War and natural disasters always bring untold misery to innocent civilian populations.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_80",
@@ -717,7 +796,8 @@
     "meaning": "[adj.] 偶尔的，间或发生的，临时的",
     "detail": "核心搭配: occasional visits; an occasional cigarette; for occasional use | 考点提示: 形近形容词，修饰名词",
     "example": "Apart from an occasional misunderstanding, the two roommates got along quite well.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_81",
@@ -726,7 +806,8 @@
     "meaning": "[adv.] 偶尔，有时，间或",
     "detail": "核心搭配: happen occasionally; occasionally feel wretched | 考点提示: 单元测试Q18考点，汉译英重点副词",
     "example": "Occasionally we would feel wretched because we had to spend a lot of time reading the text.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_82",
@@ -735,7 +816,8 @@
     "meaning": "[n.] 困惑，迷惘，不知所措",
     "detail": "核心搭配: with growing perplexity; in deep perplexity; resolve perplexities | 考点提示: 单元测试Q5考点，汉译英核心表达：resolve perplexities (解开困惑)",
     "example": "He began counting the scales, and then, with growing perplexity, counted them a second time.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_83",
@@ -744,7 +826,8 @@
     "meaning": "[n.] 宽慰，解脱；（痛苦/焦虑的）缓解；救济品",
     "detail": "核心搭配: breathe a sigh of relief; to one's great relief; pain relief; disaster relief | 考点提示: 单元测试Q16考点，必背搭配 breathe a sigh of relief",
     "example": "Hearing that all team members were safe, she breathed a deep sigh of relief.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_84",
@@ -753,7 +836,8 @@
     "meaning": "[adj.] 随后的，后来的",
     "detail": "核心搭配: subsequent events / developments; subsequent years; subsequent to (在…之后) | 考点提示: 单元测试Q19考点，汉译英重点词",
     "example": "This critical ability proved exceptionally useful to my subsequent years of study and work.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_85",
@@ -762,7 +846,8 @@
     "meaning": "[n. / v.] n. 冒险活动，风险投资；v. 敢于去，冒…险，冒险提出",
     "detail": "核心搭配: joint venture (合资企业); business venture; venture into / upon; venture an opinion | 考点提示: 单元测试Q25考点，搭配 venture into 勇于涉足",
     "example": "The explorers decided to venture into the uncharted jungle despite severe storm warnings.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_86",
@@ -771,7 +856,8 @@
     "meaning": "[v. / n.] v. 压缩，压紧；精简；n. 敷布，止血垫",
     "detail": "核心搭配: compress data; compress air; cold / hot compress; compress into | 考点提示: 题集选项高频词",
     "example": "The author managed to compress an entire historical era into a concise 200-page overview.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_87",
@@ -780,7 +866,8 @@
     "meaning": "[v.] 使恼怒，打扰，使烦恼",
     "detail": "核心搭配: annoy sb.; be annoyed by / at / with | 考点提示: 动词原形",
     "example": "The constant background buzzing sound began to annoy the students in the library.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_88",
@@ -789,7 +876,8 @@
     "meaning": "[adj.] 感到恼火的，生气的，不悦的",
     "detail": "核心搭配: be / feel annoyed at / with; visibly annoyed | 考点提示: 单元测试Q27考点，汉译英重点词",
     "example": "Sometimes we felt wretched and even a bit annoyed because we were left to our own devices.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_89",
@@ -798,7 +886,8 @@
     "meaning": "[n. / adj.] n. 流体，液体；adj. 流畅的，流动的，易变的",
     "detail": "核心搭配: preservative fluid; fluid motion / handwriting; body fluids | 考点提示: 课文与题集高频词",
     "example": "The specimen jar was filled with a special preserving fluid to protect the fish tissues.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_90",
@@ -807,7 +896,8 @@
     "meaning": "[adj.] 芳香的，香气宜人的",
     "detail": "核心搭配: fragrant flowers / tea; a fragrant scent / aroma | 考点提示: 派生词：fragrance (n. 芳香，香水)",
     "example": "The garden was filled with the delightful fragrance of blooming jasmine.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_91",
@@ -816,7 +906,8 @@
     "meaning": "[adj.] 边缘有饰边的，带流苏的，环绕的",
     "detail": "核心搭配: fringed with trees; long-fringed eyelashes; fringed rug | 考点提示: 课文描写词汇",
     "example": "The ancient lake was beautifully fringed with dense willow trees and wild reeds.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_92",
@@ -825,7 +916,8 @@
     "meaning": "[adj. / n. / v.] adj. 哑的，沉默的，无声的；n. 哑巴；v. 消音",
     "detail": "核心搭配: mute companion (无声伴侣); remain mute; mute the television | 考点提示: 课文核心意象：mute companion 指实验台上的死鱼",
     "example": "For three consecutive days, the dead fish served as his only mute companion in the lab.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_93",
@@ -834,7 +926,8 @@
     "meaning": "[adj.] 神圣的，不容亵渎的，极其庄严的",
     "detail": "核心搭配: sacred duty / right; sacred cow (不可触及的事物); hold sth. sacred | 考点提示: 近义词：holy, solemn",
     "example": "Scholars consider the pursuit of objective truth to be a sacred responsibility.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_94",
@@ -843,7 +936,8 @@
     "meaning": "[n.] 抱负，志向，渴望",
     "detail": "核心搭配: career / academic aspirations; have high aspirations; fulfill one's aspirations | 考点提示: 近义词：ambition, goal",
     "example": "Young students entered the research institute with high aspirations to conquer cancer.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_95",
@@ -852,7 +946,8 @@
     "meaning": "[adv.] 认真地，诚挚地，由衷地，恳切地",
     "detail": "核心搭配: earnestly requested; listen / speak earnestly; earnestly hope | 考点提示: 单元测试Q2核心考点，正式客套邀请常用",
     "example": "You are earnestly requested to attend the upcoming academic symposium on time.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_96",
@@ -861,7 +956,8 @@
     "meaning": "[adj.] 认真的，真诚的，诚恳的",
     "detail": "核心搭配: in earnest (认真地，严肃地); an earnest young scholar; earnest endeavor | 考点提示: 核心成语：in earnest 认真地",
     "example": "When the semester began in earnest, students were expected to conduct independent research.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_97",
@@ -870,7 +966,8 @@
     "meaning": "[v.] 放弃，舍弃（本可享用的舒适或乐趣）",
     "detail": "核心搭配: forgo one's usual break; forgo an opportunity; forgo leisure time | 考点提示: 词汇速测(Q27/Ans27) [模块一：大纲核心高频词汇]",
     "example": "To meet the deadline, the team decided to forgo its usual afternoon break.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_98",
@@ -879,7 +976,8 @@
     "meaning": "[v./n.] 快速跳上/跳进；单脚跳；快速移动",
     "detail": "核心搭配: hop in (跳进车内/迅速加入); hop on a bus; hop from one app to another | 考点提示: 单元测试(Q32) [模块二：题集考点与核心拓展]",
     "example": "The ocean may be a little colder than usual, but I think you might still be able to hop in.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_99",
@@ -888,7 +986,8 @@
     "meaning": "[phrase] 脱节，失去联系；不了解实际情况",
     "detail": "核心搭配: feel isolated and out of touch; be out of touch with reality | 考点提示: 单元测试(Q16) [模块二：题集考点与核心拓展]",
     "example": "Telecommuting makes many employees feel isolated and out of touch, leading to decreased motivation.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_100",
@@ -897,7 +996,8 @@
     "meaning": "[phrase] 当众，公开地（与 in private 相对）",
     "detail": "核心搭配: appear in public; speak in public; in public life | 考点提示: 单元测试(Q23) [模块二：题集考点与核心拓展]",
     "example": "Camilla was terrified when she first began appearing in public with Charles.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_101",
@@ -906,7 +1006,8 @@
     "meaning": "[adj.] 紧急的，迫切的",
     "detail": "核心搭配: in urgent need of; urgent emails / deadline; urgent matters | 考点提示: 单元测试(Q19) / 课件(P9) [模块二：题集考点与核心拓展]",
     "example": "A government official said the authorities were in urgent need of tents, medical personnel and equipment.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_102",
@@ -915,7 +1016,8 @@
     "meaning": "[adj.] 自然环境的，环境的",
     "detail": "核心搭配: environmental pressure; environmental protection; environmental damage | 考点提示: 单元测试(Q2) [模块二：题集考点与核心拓展]",
     "example": "Experts said the government had been forced to develop new energy due to shortages of resources and environmental pressure.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_103",
@@ -924,7 +1026,8 @@
     "meaning": "[v.] 一饮而尽，吞下（一口气喝完饮料）",
     "detail": "核心搭配: down a drink; down a cup of coffee; down a glass of water | 考点提示: 课件(P4, P10) [模块三：动作与主题辨析组]",
     "example": "Grab a piece of toast and down a cup of coffee while checking the weather and traffic.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_104",
@@ -933,7 +1036,8 @@
     "meaning": "[phr v.] 大口吞咽，大口喝下（大口快速咽下）",
     "detail": "核心搭配: swallow food or drink quickly in large mouthfuls; gulp down water | 考点提示: 课件(P4) [模块三：动作与主题辨析组]",
     "example": "He gulped down the medicine and rushed out the door.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_105",
@@ -942,7 +1046,8 @@
     "meaning": "[phr v.] 狼吞虎咽，饥不择食地吃光",
     "detail": "核心搭配: eat food very quickly, often because hungry; wolf down a burger | 考点提示: 课件(P4) [模块三：动作与主题辨析组]",
     "example": "The boy wolfed down three slices of pizza in two minutes.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_106",
@@ -951,7 +1056,8 @@
     "meaning": "[phr v.] 狼吞虎咽地大口扒饭（形象而稍带贬义）",
     "detail": "核心搭配: eat quickly, putting large amounts into mouth; shovel food in | 考点提示: 课件(P4) [模块三：动作与主题辨析组]",
     "example": "He barely tasted his lunch, just shoveling down the rice to get back to his desk.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_107",
@@ -960,7 +1066,8 @@
     "meaning": "[v./n.] 匆忙，催促（常用通用词，快速行动）",
     "detail": "核心搭配: hurry home; hurry through breakfast; in a hurry | 考点提示: 课件(P6, P10) [模块三：动作与主题辨析组]",
     "example": "We hurried them through breakfast so they wouldn't miss the school bus.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_108",
@@ -969,7 +1076,8 @@
     "meaning": "[v./n.] 仓促，急促（伴随时间压力，更容易出错）",
     "detail": "核心搭配: rush your work; rush hour; in a rush | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
     "example": "Don't rush your work, or you are more likely to make careless mistakes.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_109",
@@ -978,7 +1086,8 @@
     "meaning": "[v./n.] 短距离全速冲刺，奋力冲刺",
     "detail": "核心搭配: sprint for the bus; sprint to the finish line; 100m sprint | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
     "example": "She sprinted for the bus just as the driver was closing the doors.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_110",
@@ -987,7 +1096,8 @@
     "meaning": "[v./n.] 疾走，竞争飞奔；与时间赛跑",
     "detail": "核心搭配: race against time / against the clock; rat race | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
     "example": "He raced against the clock to complete the project before the midnight deadline.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_111",
@@ -996,7 +1106,8 @@
     "meaning": "[v.] 呼啸飞驰，疾速掠过",
     "detail": "核心搭配: zoom past; zoom through each day; zoom along the highway | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
     "example": "In our modern routine, we find ourselves zooming through each day without reflection.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_112",
@@ -1005,7 +1116,8 @@
     "meaning": "[idiom] (非正式) 飞速赶往，火速离开",
     "detail": "核心搭配: hightail it home / out of there; informal for leaving quickly | 考点提示: 课件(P6) [模块三：动作与主题辨析组]",
     "example": "As soon as the bell rang, the students hightailed it home for the holiday.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_113",
@@ -1014,7 +1126,8 @@
     "meaning": "[v.] 加快，加速（具文学色彩，常修饰步伐、心跳、节奏）",
     "detail": "核心搭配: quicken one's pace; quicken one's heartbeat; quicken the tempo | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
     "example": "The lively music quickened the tempo of the entire party.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_114",
@@ -1023,7 +1136,8 @@
     "meaning": "[phr v.] 调高，加大（像旋转机器旋钮般提升速度/音量）",
     "detail": "核心搭配: crank up the speed / volume / pressure; crank sth. to a level | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
     "example": "The factory cranked up production to meet the sudden surge in holiday orders.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_115",
@@ -1032,7 +1146,8 @@
     "meaning": "[v./n.] 加速，加快；增速（最中性常见的表达）",
     "detail": "核心搭配: speed up the pace; a general speed-up of society | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
     "example": "Technological innovations have led to a noticeable speed-up in our daily routines.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_116",
@@ -1041,7 +1156,8 @@
     "meaning": "[phr v.] 使加速运转，使活跃（机械引擎轰鸣提速意象）",
     "detail": "核心搭配: rev up an engine; rev up the economy; rev up marketing efforts | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
     "example": "The company revved up its promotional campaign right before the double eleven shopping festival.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_117",
@@ -1050,7 +1166,8 @@
     "meaning": "[v.] 加速，促进（正式书面语，用于物理速度或发展变革）",
     "detail": "核心搭配: accelerate the process of change; accelerate economic growth | 考点提示: 课件(P8) [模块三：动作与主题辨析组]",
     "example": "Digital tools have accelerated the pace at which business communication happens.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_118",
@@ -1059,7 +1176,8 @@
     "meaning": "[n.] 设备，仪器，装置（中性、通用的客观词汇）",
     "detail": "核心搭配: timekeeping device; electronic device; a device for measuring time | 考点提示: 课件(P28) [模块三：动作与主题辨析组]",
     "example": "A clock is a traditional timekeeping device, whereas a smartphone is a multi-purpose tool.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_119",
@@ -1068,7 +1186,8 @@
     "meaning": "[n.] 精巧的小器具，小玩意（巧妙实用但非生存必需品）",
     "detail": "核心搭配: electronic gadget; handy gadget; smartwatch as a gadget | 考点提示: 课件(P28) [模块三：动作与主题辨析组]",
     "example": "A smartwatch is a useful gadget, but having too many gadgets can be distracting.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_120",
@@ -1077,7 +1196,8 @@
     "meaning": "[n.] 巧妙器械，人造装置（带有人为设计或刻意控制意涵）",
     "detail": "核心搭配: mechanical contrivances; deliberate contrivance | 考点提示: 课件(P28, P29) [模块三：动作与主题辨析组]",
     "example": "Instead of following natural rhythms, humanity is controlled by mechanical contrivances.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_121",
@@ -1086,7 +1206,8 @@
     "meaning": "[suffix] 表示“长时间、大规模、高强度的马拉松式活动”",
     "detail": "核心搭配: hackathon (黑客松); readathon (阅读马拉松); exam-athon (备考连轴转) | 考点提示: 课件(P18) [模块三：动作与主题辨析组]",
     "example": "The week before final exams always feels like an exhausting exam-athon.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_122",
@@ -1095,7 +1216,8 @@
     "meaning": "[v./n.] 使满足，实现；成就感，充实感",
     "detail": "核心搭配: fulfill one's potential; a fulfilling life; sense of fulfillment | 考点提示: 课件(P1, P3) [模块三：动作与主题辨析组]",
     "example": "Why life in the fast lane fails to fulfill us: the faster we go, the further behind we fall.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_123",
@@ -1104,7 +1226,8 @@
     "meaning": "[idiom] 过快节奏、刺激且高风险的生活",
     "detail": "核心搭配: life in the fast lane; fast-lane lifestyle | 考点提示: 课件(P1, P2) [模块三：动作与主题辨析组]",
     "example": "To live in the fast lane means leading a busy, exciting, and sometimes exhausting existence.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_124",
@@ -1113,7 +1236,8 @@
     "meaning": "[v./n.] 急剧扩散，迅速激增，激增",
     "detail": "核心搭配: the proliferation of apps/devices/innovations; proliferate rapidly | 考点提示: 课件(P7) [模块三：动作与主题辨析组]",
     "example": "We have witnessed a proliferation of time-saving innovations that keep us busier than ever.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_125",
@@ -1122,7 +1246,8 @@
     "meaning": "[n./v.] 社会活动家 / 提倡，拥护者",
     "detail": "核心搭配: social activist; advocate for change; advocate slower living | 考点提示: 课件(P12) [模块三：动作与主题辨析组]",
     "example": "Even activists who advocate for simple living cannot deny the allure of technological speed.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_126",
@@ -1131,7 +1256,8 @@
     "meaning": "[n./adj.] 沼泽；应接不暇的，被繁重任务淹没的",
     "detail": "核心搭配: be swamped with work/emails; stuck in a swamp | 考点提示: 课件(P15) [模块三：动作与主题辨析组]",
     "example": "I'm completely swamped with coursework this semester and barely have time to breathe.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_127",
@@ -1140,7 +1266,8 @@
     "meaning": "[n./v.] 耐力，持久力 / 忍受，经受",
     "detail": "核心搭配: physical endurance; endure hardship; test one's endurance | 考点提示: 课件(P17) [模块三：动作与主题辨析组]",
     "example": "Running a marathon or finishing an exam-athon requires great mental and physical endurance.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_128",
@@ -1149,7 +1276,8 @@
     "meaning": "[n.] 齐声赞同/批判；副歌，合唱队",
     "detail": "核心搭配: a chorus of criticism/disapproval/praise; in chorus | 考点提示: 课件(P24) [模块三：动作与主题辨析组]",
     "example": "There was a rising chorus of criticism from social critics against the idea that faster is always better.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_129",
@@ -1158,7 +1286,8 @@
     "meaning": "[adj.] 有条理的，安排周密的",
     "detail": "核心搭配: an organized person; keep things organized; organized schedule | 考点提示: 课件(P25) [模块三：动作与主题辨析组]",
     "example": "We have become more organized, yet less spontaneous and joyful in our daily experiences.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_130",
@@ -1167,7 +1296,8 @@
     "meaning": "[phrase] 被…反复打断，被…频繁点缀",
     "detail": "核心搭配: punctuated by phone alerts / bursts of laughter / delivery calls | 考点提示: 课件(P27, P29) [模块三：动作与主题辨析组]",
     "example": "Humanity created an artificial time environment punctuated by mechanical contrivances and electronic impulses.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_131",
@@ -1176,7 +1306,8 @@
     "meaning": "[phrase] 人造时间环境（由钟表、日程等非自然节律主导的生活系统）",
     "detail": "核心搭配: live in an artificial time environment; contrast with natural rhythms | 考点提示: 课件(P29) [模块三：动作与主题辨析组]",
     "example": "Instead of living by sunrise and sunset, we dwell in an artificial time environment regulated by clocks.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_132",
@@ -1185,7 +1316,8 @@
     "meaning": "[n.] 横幅，标语；旗号，原则",
     "detail": "核心搭配: under the banner of progress / efficiency / science | 考点提示: 课件(P31) [模块三：动作与主题辨析组]",
     "example": "Many questionable lifestyle changes have been promoted under the banner of modern efficiency.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_133",
@@ -1194,7 +1326,8 @@
     "meaning": "[n.] 态度，生活方式，对待人生的视角",
     "detail": "核心搭配: approach to life; a balanced approach; personal approach | 考点提示: 课件(P32) [模块三：动作与主题辨析组]",
     "example": "Your approach to life is a personal preference: slow contemplation or fast-lane hustle.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_134",
@@ -1203,7 +1336,8 @@
     "meaning": "[phrase] 上下起伏，晃动着走动",
     "detail": "核心搭配: bob up and down the aisle; talking heads bobbing | 考点提示: 课件(P19) [模块三：动作与主题辨析组]",
     "example": "Two talking heads bobbing up and down the aisle showed two people together physically but disconnected mentally.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_135",
@@ -1212,7 +1346,8 @@
     "meaning": "[n.] 无休止的竞争，内卷名利场（侧重个人感到身心俱疲）",
     "detail": "核心搭配: escape / get out of / leave the rat race; trapped in the rat race | 考点提示: 课件(P21) [模块四：时代热词与数字压力]",
     "example": "Many young professionals dream of escaping the rat race and returning to a simpler rural lifestyle.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_136",
@@ -1221,7 +1356,8 @@
     "meaning": "[n.] 内卷（侧重群体无实质收益的过度付出与竞争）",
     "detail": "核心搭配: overlap with rat race; everyone works harder for little gain | 考点提示: 课件(P21) [模块四：时代热词与数字压力]",
     "example": "Neijuan describes an environment where everyone puts in more effort, but no one gains much more.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_137",
@@ -1230,7 +1366,8 @@
     "meaning": "[n.] 拼命文化，打鸡血加班文化",
     "detail": "核心搭配: Hustle culture makes rest feel lazy; glamorize overtime | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
     "example": "Hustle culture praises the person who sleeps four hours a night and works nonstop.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_138",
@@ -1239,7 +1376,8 @@
     "meaning": "[n.] 苦干文化，连轴转磨砺文化",
     "detail": "核心搭配: Grind culture praises nonstop work; daily grind | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
     "example": "Young workers are pushing back against grind culture in pursuit of better work-life balance.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_139",
@@ -1248,7 +1386,8 @@
     "meaning": "[n.] 军备竞赛（比喻各方不断加码的恶性攀比竞争）",
     "detail": "核心搭配: academic arms race; tutoring has become an arms race | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
     "example": "After-school tutoring has turned into an arms race among anxious parents.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_140",
@@ -1257,7 +1396,8 @@
     "meaning": "[phrase] 逐底竞争（恶性降维竞争导致整体环境恶化）",
     "detail": "核心搭配: lead to a race to the bottom; price war as a race to the bottom | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
     "example": "Unregulated overtime and price dumping create a destructive race to the bottom.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_141",
@@ -1266,7 +1406,8 @@
     "meaning": "[n.] 竞争跑步机（付出更多努力却在原地踏步）",
     "detail": "核心搭配: stuck on a competitive treadmill; run on a treadmill | 考点提示: 课件(P22) [模块四：时代热词与数字压力]",
     "example": "College applicants often feel trapped on a competitive treadmill where standards keep rising.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_142",
@@ -1275,7 +1416,8 @@
     "meaning": "[n.] 全天候在线文化，时刻待命文化",
     "detail": "核心搭配: an always-on workplace culture; expect 24/7 availability | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "The always-on culture blurred the boundary between professional obligations and personal time.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_143",
@@ -1284,7 +1426,8 @@
     "meaning": "[phrase] 随时随地联系得上，保持全天候可联系",
     "detail": "核心搭配: be constantly reachable; pressure to be reachable | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "Smartphones have made employees constantly reachable, even during family dinners and weekends.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_144",
@@ -1293,7 +1436,8 @@
     "meaning": "[n.] 非工作时间消息，下班后的工作讯息",
     "detail": "核心搭配: receive after-hours messages; reply to after-hours emails | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "Receiving after-hours messages from supervisors is a major source of employee burnout.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_145",
@@ -1302,7 +1446,8 @@
     "meaning": "[n.] 即时响应，秒回",
     "detail": "核心搭配: expect an instant response; demand instant responses | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "Fast messaging creates an expectation of an instant response to every ping.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_146",
@@ -1311,7 +1456,8 @@
     "meaning": "[n.] 通知疲劳（弹窗和提示音过多引起的厌烦倦怠）",
     "detail": "核心搭配: suffer from notification fatigue; silence notifications | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "Constant pop-ups from shopping and social media apps result in severe notification fatigue.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_147",
@@ -1320,7 +1466,8 @@
     "meaning": "[n.] 数字化信息过载，数码超载",
     "detail": "核心搭配: experience digital overload; combat digital overload | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "Students feeling digital overload are encouraged to take a weekly digital detox.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_148",
@@ -1329,7 +1476,8 @@
     "meaning": "[n.] 离线权，断联权（下班后不回复工作消息的权利）",
     "detail": "核心搭配: exercise the right to disconnect; enact right-to-disconnect laws | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "Several countries have passed laws granting workers the right to disconnect after office hours.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_149",
@@ -1338,7 +1486,8 @@
     "meaning": "[n.] 对回复时效的心理预期",
     "detail": "核心搭配: escalating response-time expectations; manage client expectations | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "Unrealistic response-time expectations make people anxious when an email isn't answered in minutes.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_150",
@@ -1347,7 +1496,8 @@
     "meaning": "[n.] 倒计时器（制造紧迫感的倒计装置/界面）",
     "detail": "核心搭配: a ticking countdown timer; countdown timers on shopping sites | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "E-commerce websites use countdown timers to induce panic buying before a sale ends.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_151",
@@ -1356,7 +1506,8 @@
     "meaning": "[n.] 已读回执（显示消息是否已被阅读的状态标记）",
     "detail": "核心搭配: turn off read receipts; seen status on messaging apps | 考点提示: 课件(P30) [模块四：时代热词与数字压力]",
     "example": "The read receipt feature can cause social anxiety when a message shows 'Seen' with no reply.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_152",
@@ -1365,7 +1516,8 @@
     "meaning": "[phrase] 对…设定明确严格的界限",
     "detail": "核心搭配: set firm limits on screen time; set limits on overtime | 考点提示: 课件(P33) [模块四：时代热词与数字压力]",
     "example": "It is essential to set firm limits on work messages after 10 p.m. to guarantee restorative sleep.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_153",
@@ -1374,7 +1526,8 @@
     "meaning": "[phr v.] 缩减，调减（规模、计划或开支）",
     "detail": "核心搭配: scale back one's schedule; scale back weekend plans | 考点提示: 课件(P33) [模块四：时代热词与数字压力]",
     "example": "To relieve mental exhaustion, we decided to scale back our ambitious weekend schedule.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_154",
@@ -1383,7 +1536,8 @@
     "meaning": "[phrase] 在日程表上腾出/预留专门时间",
     "detail": "核心搭配: clear a spot on your calendar for hobbies / exercise | 考点提示: 课件(P33) [模块四：时代热词与数字压力]",
     "example": "Don't wait for free time to happen—clear a spot on your calendar for daily physical exercise.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_155",
@@ -1392,7 +1546,8 @@
     "meaning": "[phr v.] 挤出时间做，强塞进忙碌日程中",
     "detail": "核心搭配: squeeze in a workout; squeeze in a ten-minute walk | 考点提示: 课件(P33) [模块四：时代热词与数字压力]",
     "example": "My schedule was packed, but I managed to squeeze in a ten-minute walk between two meetings.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_156",
@@ -1401,7 +1556,8 @@
     "meaning": "[idiom] 争取时间，拖延时间",
     "detail": "核心搭配: buy time for negotiations; buy extra time | 考点提示: 课件(P34) [模块四：时代热词与数字压力]",
     "example": "The defense attorney asked for a two-week postponement to buy time to interview new witnesses.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_157",
@@ -1410,7 +1566,8 @@
     "meaning": "[phrase] 规划分配时间（将时间如金钱般做预算）",
     "detail": "核心搭配: budget your time wisely; time budget | 考点提示: 课件(P34) [模块四：时代热词与数字压力]",
     "example": "Students who budget their time before exam week rarely find themselves cramming overnight.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_158",
@@ -1419,7 +1576,8 @@
     "meaning": "[phrase] 时间用尽，耗尽时间",
     "detail": "核心搭配: run out of time on the exam; running out of time | 考点提示: 课件(P34) [模块四：时代热词与数字压力]",
     "example": "I had to guess the last five questions because I ran out of time.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_159",
@@ -1428,7 +1586,8 @@
     "meaning": "[adj.] 节省时间的，提高效率的",
     "detail": "核心搭配: time-saving device / innovation; time-saving technology | 考点提示: 课件(P7, P34) [模块四：时代热词与数字压力]",
     "example": "Paradoxically, every time-saving device we adopt seems to make our lives feel more rushed.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_160",
@@ -1437,7 +1596,8 @@
     "meaning": "[adj.] 极其繁重的，使人精疲力竭的",
     "detail": "核心搭配: a grueling schedule; grueling training; grueling journey | 考点提示: 单元测试(Q33干扰项) [模块五：题集重要干扰与对比词]",
     "example": "After a grueling day of meetings and lab work, she collapsed onto her bed.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_161",
@@ -1446,7 +1606,8 @@
     "meaning": "[adj.] 无可否认的，确凿无疑的",
     "detail": "核心搭配: undeniable fact; undeniable truth; undeniable talent | 考点提示: 单元测试(Q33干扰项) [模块五：题集重要干扰与对比词]",
     "example": "It is an undeniable fact that digital devices have revolutionized modern communication.",
-    "slashed": true
+    "slashed": true,
+    "example_trans": ""
   },
   {
     "id": "midterm_162",
@@ -1455,7 +1616,8 @@
     "meaning": "[n.] 消遣，休闲娱乐活动",
     "detail": "核心搭配: a pleasurable pastime; favorite pastime; outdoor pastime | 考点提示: 单元测试(Q22干扰项) / 教材原文 [模块五：题集重要干扰与对比词]",
     "example": "Reading a physical book in a sunlit corner used to be his favorite weekend pastime.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_163",
@@ -1464,7 +1626,8 @@
     "meaning": "[n.] 冥想，沉思",
     "detail": "核心搭配: deep meditation; practice meditation; silent meditation | 考点提示: 单元测试(Q8干扰项) [模块五：题集重要干扰与对比词]",
     "example": "A few minutes of quiet meditation each morning can help calm an anxious mind.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_164",
@@ -1473,7 +1636,8 @@
     "meaning": "[n.] 通道，过道（书店货架间、机舱、超市等走道）",
     "detail": "核心搭配: walk down the aisle; bookstore aisle; aisle seat | 考点提示: 单元测试(Q22干扰项) / 课件(P19) [模块五：题集重要干扰与对比词]",
     "example": "Two friends were scanning book titles while walking down the crowded bookstore aisle.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_165",
@@ -1482,7 +1646,8 @@
     "meaning": "[n.] 差事，跑腿日常事务",
     "detail": "核心搭配: run errands; daily errands; on an errand | 考点提示: 单元测试(Q24干扰项) [模块五：题集重要干扰与对比词]",
     "example": "He spent Saturday morning running errands: picking up dry cleaning and buying groceries.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_166",
@@ -1491,7 +1656,8 @@
     "meaning": "[adj.] 滑稽好笑的，古怪可笑的",
     "detail": "核心搭配: a comical sight; comical expression | 考点提示: 单元测试(Q25干扰项) [模块五：题集重要干扰与对比词]",
     "example": "The cat looked comical trying to squeeze itself into a tiny cardboard shoebox.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_167",
@@ -1500,7 +1666,8 @@
     "meaning": "[adj.] 宽泛的，自由的；意译的（与 literal 相对）",
     "detail": "核心搭配: liberal translation (意译); liberal arts; liberal attitude | 考点提示: 单元测试(Q29对比考点) [模块五：题集重要干扰与对比词]",
     "example": "A successful translator balances literal accuracy with a smooth, liberal rendering of idiom.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   },
   {
     "id": "midterm_168",
@@ -1509,6 +1676,7 @@
     "meaning": "[v.] 变坏，恶化，退化",
     "detail": "核心搭配: deteriorate rapidly; deteriorating quality of life; health deteriorates | 考点提示: 单元测试(Q12题干核心词) [模块五：题集重要干扰与对比词]",
     "example": "In trying to cram so much into our lives, we are actually deteriorating the quality of those lives.",
-    "slashed": false
+    "slashed": false,
+    "example_trans": ""
   }
 ]
